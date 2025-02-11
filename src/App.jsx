@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigation from './components/Layout/Navigation';
+import Dropdown from './components/Layout/Dropdown';
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
             <Routes>
                 <Route 
                     path="/" 
-                    element={<Navigation/>} 
+                    element={<Dropdown/>} 
                 />
             </Routes>
         </Router>

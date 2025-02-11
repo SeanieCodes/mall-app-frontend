@@ -1,6 +1,6 @@
 import Select from 'react-select';
 
-const Navigation = ({ onUserTypeChange }) => {
+const Dropdown = ({ onUserTypeChange }) => {
   const options = [
     { value: 'shopper', label: 'Shopper' },
     { value: 'staff', label: 'Staff' }
@@ -15,4 +15,4 @@ const Navigation = ({ onUserTypeChange }) => {
   );
 };
 
-export default Navigation;
+export default Dropdown;
