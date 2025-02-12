@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dropdown from './components/Layout/Dropdown';
 import LoginForm from './components/Auth/LoginForm';
 import SignupForm from './components/Auth/SignupForm';
+import './App.css';
 
 const App = () => {
 
