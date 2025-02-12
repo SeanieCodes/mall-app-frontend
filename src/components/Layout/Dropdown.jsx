@@ -1,18 +1,16 @@
 import Select from 'react-select';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Dropdown = () => {
+const Dropdown = ({onTypeChange}) => {
 
-  const [selectedType, setSelectedType] = useState('shopper');
   const navigate = useNavigate();
-  
+
   const options = [
     { value: 'shopper', label: 'Shopper' },
     { value: 'staff', label: 'Staff' }
   ];
   const handleChange = (option) => {
-    setSelectedType(option.value);
+    onTypeChange(option.value);
   };
 
   return (
