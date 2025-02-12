@@ -1,0 +1,55 @@
+.select__control {
+    border: 2px solid var(--lighter-green) !important;
+    box-shadow: 0 0 10px var(--glow) !important;
+    border-radius: 10px !important;
+    background-color: var(--white) !important;
+    cursor: pointer !important;
+  }
+  
+  .select__control--is-focused {
+    box-shadow: 0 0 15px var(--glow) !important;
+    border-color: var(--light-green) !important;
+  }
+  
+  .select__menu {
+    border: 2px solid var(--lighter-green) !important;
+    border-radius: 10px !important;
+    background-color: var(--white) !important;
+    box-shadow: 0 2px 4px var(--shadow) !important;
+  }
+  
+  .select__option {
+    background-color: var(--white) !important;
+    color: var(--darker-green) !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+  }
+  
+  .select__option--is-focused,
+  .select__option--is-selected {
+    background-color: var(--white) !important;
+    box-shadow: none !important;
+  }
+  
+  .select__menu .select__option:hover {
+    background-color: var(--primary-green) !important;
+    box-shadow: 0 0 10px var(--glow) !important;
+  }
+  
+  .select__single-value {
+    color: var(--darker-green) !important;
+    cursor: pointer !important;
+  }
+  
+  .select__input-container {
+    cursor: pointer !important;
+  }
+  
+  .select__input-container input {
+    cursor: pointer !important;
+    caret-color: transparent !important;
+  }
+  
+  .select__value-container {
+    cursor: pointer !important;
+  }

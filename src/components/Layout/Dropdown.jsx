@@ -1,5 +1,6 @@
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
+import './Dropdown.css';
 
 const Dropdown = ({onTypeChange}) => {
 
@@ -18,6 +19,7 @@ const Dropdown = ({onTypeChange}) => {
       options={options}
       defaultValue={options[0]}
       onChange={handleChange}
+      classNamePrefix="select"
     />
   );
 };
