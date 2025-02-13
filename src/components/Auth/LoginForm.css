@@ -52,11 +52,16 @@
 }
 
 .loginButton:hover {
-    background-color: var(--dark-green);
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary-green);
+
+}
+
+.loginButton:focus {
+    outline: none;
 }
 
 .errorMessage {
-    color: #ff3b30;
+    color: #fa0404;
     font-size: 0.9rem;
     text-align: center;
 }
@@ -70,7 +75,7 @@
 .signupLink {
     background: none;
     border: none;
-    color: var(--primary-green);
+    color: var(--dark-green);
     font-weight: 500;
     cursor: pointer;
     margin-left: 5px;
