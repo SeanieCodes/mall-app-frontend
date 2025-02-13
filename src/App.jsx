@@ -1,18 +1,33 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dropdown from './components/Layout/Dropdown';
+import LoginForm from './components/Auth/LoginForm';
+import SignupForm from './components/Auth/SignupForm';
+import './App.css';
 
-function App() {
+const App = () => {
+    const [selectedType, setSelectedType] = useState('shopper');
 
-  return (
-    <Router>
+    return (
+        <Router>
             <Routes>
                 <Route 
                     path="/" 
-                    
+                    element={
+                        <div className="app-container">
+                            <h1>Garden Grove</h1>
+                            <Dropdown onTypeChange={setSelectedType} />
+                            <LoginForm userType={selectedType} />
+                        </div>
+                    }
+                />
+                <Route 
+                    path="/signup" 
+                    element={<SignupForm userType={selectedType} />} 
                 />
             </Routes>
         </Router>
-  )
-}
+    );
+};
 
 export default App;
