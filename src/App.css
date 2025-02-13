@@ -49,4 +49,9 @@ h1 {
   font-weight: 500;
   font-size: 2.5rem;
   letter-spacing: -0.5px;
+  padding: 15px 30px;
+  border: 2px solid var(--lighter-green);
+  border-radius: 20px;
+  box-shadow: 0 0 20px var(--glow);
+  background-color: var(--white);
 }
