@@ -4,24 +4,17 @@ import Dropdown from './components/Layout/Dropdown';
 import LoginForm from './components/Auth/LoginForm';
 import SignupForm from './components/Auth/SignupForm';
 import './App.css';
-import greenClover from './assets/GreenClover.png';
 
 const App = () => {
+    const [selectedType, setSelectedType] = useState('shopper');
 
-  const [selectedType, setSelectedType] = useState('shopper');
-
-  return (
-    <Router>
+    return (
+        <Router>
             <Routes>
                 <Route 
                     path="/" 
                     element={
-                      <div
-                      className="app-container"
-                      style={{ 
-                        backgroundImage: `url(${greenClover})`,
-                      }}
-                      >
+                        <div className="app-container">
                             <h1>Garden Grove</h1>
                             <Dropdown onTypeChange={setSelectedType} />
                             <LoginForm userType={selectedType} />
@@ -34,7 +27,7 @@ const App = () => {
                 />
             </Routes>
         </Router>
-  );
+    );
 };
 
 export default App;

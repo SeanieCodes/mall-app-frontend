@@ -1,6 +1,6 @@
 .loginContainer {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     padding: 20px;
     border-radius: 12px;
     background-color: var(--white);
@@ -56,7 +56,7 @@
 }
 
 .errorMessage {
-    color: #07f126;
+    color: #ff3b30;
     font-size: 0.9rem;
     text-align: center;
 }
