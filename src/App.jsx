@@ -4,6 +4,7 @@ import Dropdown from './components/Layout/Dropdown';
 import LoginForm from './components/Auth/LoginForm';
 import SignupForm from './components/Auth/SignupForm';
 import './App.css';
+import greenClover from './assets/GreenClover.png';
 
 const App = () => {
 
@@ -15,7 +16,12 @@ const App = () => {
                 <Route 
                     path="/" 
                     element={
-                      <div className="app-container">
+                      <div
+                      className="app-container"
+                      style={{ 
+                        backgroundImage: `url(${greenClover})`,
+                      }}
+                      >
                             <h1>Garden Grove</h1>
                             <Dropdown onTypeChange={setSelectedType} />
                             <LoginForm userType={selectedType} />
