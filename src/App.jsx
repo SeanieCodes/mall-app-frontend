@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Dropdown from './components/Layout/Dropdown';
-import LoginForm from './components/Auth/LoginForm';
-import SignupForm from './components/Auth/SignupForm';
+import Dropdown from './components/Dropdown/Dropdown';
+import LoginForm from './components/Auth/LoginForm/LoginForm';
+import SignupForm from './components/Auth/SignupForm/SignupForm';
 import './App.css';
 
 const App = () => {
