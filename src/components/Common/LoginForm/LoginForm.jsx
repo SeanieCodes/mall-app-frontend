@@ -39,9 +39,9 @@ const LoginForm = ({ userType }) => {
                 }));
 
                 if (userType === 'staff') {
-                    navigate('/staff-dashboard');
+                    navigate('/staff/dashboard');
                 } else {
-                    navigate('/shopper-dashboard');
+                    navigate('/shopper/dashboard');
                 }
             } else {
                 setError('Invalid credentials');
