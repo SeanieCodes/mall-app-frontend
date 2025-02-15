@@ -52,7 +52,8 @@
 }
 
 .signupButton:hover {
-    background-color: var(--dark-green);
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary-green);
+
 }
 
 .signupButton:focus {
