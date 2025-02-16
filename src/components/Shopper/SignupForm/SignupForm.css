@@ -1,4 +1,4 @@
-.loginContainer {
+.signupContainer {
     width: 100%;
     max-width: 500px;
     padding: 20px;
@@ -7,7 +7,7 @@
     margin-top: 20px;
 }
 
-.loginForm {
+.signupForm {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -39,7 +39,7 @@
     box-shadow: 0 0 10px var(--glow);
 }
 
-.loginButton {
+.signupButton {
     background-color: var(--primary-green);
     color: var(--white);
     padding: 12px;
@@ -51,31 +51,33 @@
     transition: all 0.2s ease;
 }
 
-.loginButton:hover {
+.signupButton:hover {
     box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary-green);
 
 }
 
-.loginButton:focus {
+.signupButton:focus {
     outline: none;
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary-green);
+    background-color: var(--dark-green);
 }
 
 .errorMessage {
-    color: #fa0404;
+    color: #ff3b30;
     font-size: 0.9rem;
     text-align: center;
 }
 
-.signupPrompt {
+.loginPrompt {
     text-align: center;
     margin-top: 10px;
     font-size: 0.9rem;
 }
 
-.signupLink {
+.loginLink {
     background: none;
     border: none;
-    color: var(--dark-green);
+    color: var(--primary-green);
     font-weight: 500;
     cursor: pointer;
     margin-left: 5px;
@@ -83,7 +85,7 @@
     font-size: 0.9rem;
 }
 
-.signupLink:hover {
+.loginLink:hover {
     color: var(--dark-green);
     text-decoration: underline;
 }

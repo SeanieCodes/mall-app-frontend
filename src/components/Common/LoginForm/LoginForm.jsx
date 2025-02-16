@@ -28,8 +28,28 @@ const LoginForm = ({ userType }) => {
 
         setError('');
         
-        // add authentication logic
-        console.log('Login attempted:', { userType, ...formData });
+        try {
+            // mock code, put API call here to verify credentials later
+            const mockLoginSuccess = true;
+
+            if (mockLoginSuccess) {
+                localStorage.setItem('user', JSON.stringify({
+                    username: formData.username,
+                    role: userType
+                }));
+
+                if (userType === 'staff') {
+                    navigate('/staff/dashboard');
+                } else {
+                    navigate('/shopper/dashboard');
+                }
+            } else {
+                setError('Invalid credentials');
+            }
+        } catch (err) {
+            setError('Login failed. Please try again.');
+            console.error('Login error:', err);
+        }
     };
 
     return (
