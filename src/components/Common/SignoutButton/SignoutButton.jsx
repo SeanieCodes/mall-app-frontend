@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import './SignOut.css';
+import './SignoutButton.css';
 
-const SignOut = () => {
+const SignoutButton = () => {
     const navigate = useNavigate();
 
     const handleSignOut = () => {
         // authentication logistics later
+        localStorage.removeItem('user');
         navigate('/');
     };
 
@@ -19,4 +20,4 @@ const SignOut = () => {
     );
 };
 
-export default SignOut;
+export default SignoutButton;

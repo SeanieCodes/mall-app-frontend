@@ -1,0 +1,95 @@
+.mainBackground {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    background-image: url('../../assets/GreenClover.png');
+    background-repeat: repeat;
+    background-size: 380px;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.dashboardContainer {
+    width: 90%;
+    max-width: 1200px;
+    padding: 40px;
+    background-color: var(--white);
+    border-radius: 20px;
+    border: 2px solid var(--primary-green);
+    box-shadow: 0 0 20px var(--glow);
+}
+
+.dashboardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--lighter-green);
+}
+
+.welcomeText {
+    color: var(--darker-green);
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.vouchersGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    padding: 20px 0;
+}
+
+.voucherCard {
+    background-color: var(--white);
+    border: 2px solid var(--lighter-green);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.voucherCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 20px var(--glow);
+    z-index: 10;
+}
+
+.voucherCard h3 {
+    color: var(--darker-green);
+    margin: 0 0 16px 0;
+    font-size: 1.2rem;
+}
+
+.discountText {
+    color: var(--dark-green);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 12px 0;
+}
+
+.validityText {
+    color: var(--darker-green);
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.8;
+}
+
+@media (max-width: 1024px) {
+    .vouchersGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .vouchersGrid {
+        grid-template-columns: 1fr;
+    }
+}

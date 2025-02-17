@@ -8,9 +8,12 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    z-index: 10;
+    position: relative;
 }
 
 .signOutButton:hover {
-    background-color: var(--lighter-green);
+    background-color: var(--white);
     box-shadow: 0 0 10px var(--glow);
+    border: 2px solid var(--lighter-green);
 }
