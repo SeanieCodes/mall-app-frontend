@@ -17,3 +17,15 @@
     box-shadow: 0 0 10px var(--glow);
     border: 2px solid var(--lighter-green);
 }
+
+.signOutButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--white),
+                0 0 0 4px var(--primary-green);
+}
+
+.signOutButton:hover:focus {
+    box-shadow: 0 0 10px var(--glow),
+                0 0 0 2px var(--white),
+                0 0 0 4px var(--primary-green);
+}
