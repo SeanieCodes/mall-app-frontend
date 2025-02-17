@@ -13,7 +13,7 @@ const ShopperDashboard = () => {
     }, []);
 
     // mock vouchers
-    const mockVouchers = Array(6).fill(null).map((_, index) => ({
+    const mockVouchers = Array(20).fill(null).map((_, index) => ({
         id: index + 1,
         storeName: `Store ${index + 1}`,
         discount: '20% OFF',
