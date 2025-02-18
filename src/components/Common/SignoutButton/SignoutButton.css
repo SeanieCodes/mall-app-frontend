@@ -8,9 +8,23 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    z-index: 10;
+    position: relative;
 }
 
 .signOutButton:hover {
-    background-color: var(--lighter-green);
-    box-shadow: 0 0 10px var(--glow);
+    border: 2px solid var(--lighter-green);
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary-green);
+}
+
+.signOutButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--white),
+                0 0 0 4px var(--primary-green);
+}
+
+.signOutButton:hover:focus {
+    box-shadow: 0 0 10px var(--glow),
+                0 0 0 2px var(--white),
+                0 0 0 4px var(--primary-green);
 }
