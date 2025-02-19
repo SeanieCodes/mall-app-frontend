@@ -1,0 +1,38 @@
+.voucherDetails {
+    background-color: var(--white);
+    border: 2px solid var(--lighter-green);
+    border-radius: 16px;
+    padding: 24px;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.storeName {
+    color: var(--darker-green);
+    font-size: 1.5rem;
+    margin: 0 0 20px 0;
+    font-weight: 500;
+}
+
+.discountSection {
+    text-align: center;
+    margin: 24px 0;
+    padding: 16px;
+    background-color: var(--gray);
+    border-radius: 12px;
+}
+
+.discountAmount {
+    color: var(--darker-green);
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+.expiryDate {
+    color: var(--dark-green);
+    font-size: 0.9rem;
+    margin: 16px 0 0 0;
+}
