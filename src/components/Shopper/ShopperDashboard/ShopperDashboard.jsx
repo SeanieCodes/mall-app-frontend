@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
+import VoucherDetails from '../../Common/VoucherDetails/VoucherDetails';
 import './ShopperDashboard.css';
 
 const ShopperDashboard = () => {
     const [username, setUsername] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user'));
@@ -12,12 +15,12 @@ const ShopperDashboard = () => {
         }
     }, []);
 
-    // mock vouchers
+    // Mock voucher data
     const mockVouchers = Array(20).fill(null).map((_, index) => ({
         id: index + 1,
         storeName: `Store ${index + 1}`,
         discount: '20% OFF',
-        validUntil: '2024-12-31'
+        enddate: '2024-12-31'
     }));
 
     return (
@@ -30,10 +33,12 @@ const ShopperDashboard = () => {
 
                 <main className="vouchersGrid">
                     {mockVouchers.map(voucher => (
-                        <div key={voucher.id} className="voucherCard">
-                            <h3>{voucher.storeName}</h3>
-                            <p className="discountText">{voucher.discount}</p>
-                            <p className="validityText">Valid until: {voucher.validUntil}</p>
+                        <div 
+                            key={voucher.id} 
+                            onClick={() => navigate(`/shopper/voucher/${voucher.id}`)}
+                            className="clickableVoucher"
+                        >
+                            <VoucherDetails voucher={voucher} />
                         </div>
                     ))}
                 </main>

@@ -44,28 +44,24 @@
     padding: 20px 0;
 }
 
-.voucherCard {
-    background-color: var(--white);
-    border: 2px solid var(--lighter-green);
-    border-radius: 16px;
-    padding: 24px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.clickableVoucher {
     cursor: pointer;
-    position: relative;
-    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background: none;
+    border-radius: 16px;
+}
+
+.voucherDetails {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     overflow: hidden;
 }
 
-.voucherCard:hover {
+.voucherDetails:hover {
     transform: translateY(-4px);
     box-shadow: 0 0 20px var(--glow);
-    z-index: 10;
-}
-
-.voucherCard h3 {
-    color: var(--darker-green);
-    margin: 0 0 16px 0;
-    font-size: 1.2rem;
 }
 
 .discountText {
