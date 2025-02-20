@@ -1,0 +1,179 @@
+.mainBackground {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    background-image: url('../../assets/GreenClover.png');
+    background-repeat: repeat;
+    background-size: 380px;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.voucherFormContainer {
+    width: 90%;
+    max-width: 800px;
+    padding: 40px;
+    background-color: var(--white);
+    border-radius: 20px;
+    border: 2px solid var(--primary-green);
+    box-shadow: 0 0 20px var(--glow);
+}
+
+.formHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--lighter-green);
+    gap: 40px;
+}
+
+.headerRight {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.headerLeft {
+    color: var(--darker-green);
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.backButton {
+    padding: 8px 16px;
+    background: none;
+    border: 2px solid var(--lighter-green);
+    border-radius: 12px;
+    color: var(--darker-green);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.backButton:hover {
+    border: 2px solid var(--lighter-green);
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary-green);
+}
+
+.voucherForm {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formGroup label {
+    color: var(--darker-green);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.formGroup input,
+.formGroup textarea {
+    padding: 12px;
+    border: 2px solid var(--lighter-green);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-color: var(--white);
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 10px var(--glow);
+}
+
+.dateGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.updateButton {
+    flex: 2;
+    background-color: var(--primary-green);
+    color: var(--white);
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.updateButton:hover:not(:disabled) {
+    background-color: var(--dark-green);
+    box-shadow: 0 0 10px var(--glow);
+}
+
+.deleteButton {
+    flex: 1;
+    background-color: #ff3b30;
+    color: var(--white);
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.deleteButton:hover:not(:disabled) {
+    background-color: #ff2419;
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.4);
+}
+
+.updateButton:disabled,
+.deleteButton:disabled {
+    background-color: var(--gray);
+    cursor: not-allowed;
+}
+
+.errorMessage {
+    color: #ff3b30;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 12px;
+    background-color: #ffebeb;
+    border-radius: 8px;
+    border: 1px solid #ffcdd2;
+}
+
+@media (max-width: 768px) {
+    .dateGroup {
+        grid-template-columns: 1fr;
+    }
+    
+    .buttonGroup {
+        flex-direction: column;
+    }
+    
+    .updateButton,
+    .deleteButton {
+        flex: none;
+    }
+}
+
+body::before {
+    pointer-events: none;
+}
