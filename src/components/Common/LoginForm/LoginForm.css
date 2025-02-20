@@ -90,3 +90,7 @@
     color: var(--dark-green);
     text-decoration: underline;
 }
+
+.signupLink:focus {
+    outline: none;
+}

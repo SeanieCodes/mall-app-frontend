@@ -77,7 +77,7 @@
 .loginLink {
     background: none;
     border: none;
-    color: var(--primary-green);
+    color: var(--dark-green);
     font-weight: 500;
     cursor: pointer;
     margin-left: 5px;
@@ -88,4 +88,8 @@
 .loginLink:hover {
     color: var(--dark-green);
     text-decoration: underline;
+}
+
+.loginLink:focus {
+    outline: none;
 }
