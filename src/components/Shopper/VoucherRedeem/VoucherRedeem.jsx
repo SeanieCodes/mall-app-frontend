@@ -21,11 +21,14 @@ const VoucherRedeem = () => {
 
         // Mock fetching voucher data - replace with API call later
         const mockVoucher = {
-            id: id,
-            storeName: "Example Store",
-            discount: "20% OFF",
-            enddate: "2024-12-31",
-        };
+          id: id,
+          storeName: "Example Store",
+          discount: "20% OFF",
+          description: "Get an exclusive 20% discount on all items at Example Store!",
+          startDate: "2024-02-01",
+          endDate: "2024-12-31",
+          usagePerShopper: 1
+      };      
         setVoucher(mockVoucher);
     }, [id]);
 

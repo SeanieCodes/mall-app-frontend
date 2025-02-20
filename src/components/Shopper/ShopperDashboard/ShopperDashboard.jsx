@@ -20,8 +20,11 @@ const ShopperDashboard = () => {
         id: index + 1,
         storeName: `Store ${index + 1}`,
         discount: '20% OFF',
-        enddate: '2024-12-31'
-    }));
+        description: `Special discount at Store ${index + 1}! Grab your deal now.`,
+        startDate: '2024-02-01',
+        endDate: '2024-12-31',
+        usagePerShopper: 1
+    }));    
 
     return (
         <div className="mainBackground">
