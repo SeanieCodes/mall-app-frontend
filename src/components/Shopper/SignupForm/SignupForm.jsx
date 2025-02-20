@@ -6,7 +6,6 @@ const SignupForm = ({ userType }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
-        email: '',
         password: '',
         confirmPassword: ''
     });
@@ -23,7 +22,7 @@ const SignupForm = ({ userType }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
+        if (!formData.username || !formData.password || !formData.confirmPassword) {
             setError('Please fill in all fields');
             return;
         }
@@ -35,12 +34,6 @@ const SignupForm = ({ userType }) => {
 
         if (formData.password.length < 6) {
             setError('Password must be at least 6 characters long');
-            return;
-        }
-
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(formData.email)) {
-            setError('Please enter a valid email address');
             return;
         }
 
@@ -68,18 +61,6 @@ const SignupForm = ({ userType }) => {
                             value={formData.username}
                             onChange={handleInputChange}
                             placeholder="Choose a username"
-                        />
-                    </div>
-
-                    <div className="formGroup">
-                        <label htmlFor="email">Email Address</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="Enter your email"
                         />
                     </div>
 
