@@ -1,6 +1,7 @@
 import './VoucherDetails.css';
 
-const VoucherDetails = ({ voucher }) => {
+const VoucherDetails = ({ voucher, isInteractive = false }) => {
+    if (!voucher) return null;
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-US', {
             year: 'numeric',
@@ -10,7 +11,7 @@ const VoucherDetails = ({ voucher }) => {
     };
 
     return (
-        <div className="voucherDetails">
+        <div className={`voucherDetails ${isInteractive ? 'hoverEffect' : ''}`}>
             <h3 className="storeName">{voucher.storeName}</h3>
             <div className="discountSection">
                 <span className="discountAmount">{voucher.discount}</span>

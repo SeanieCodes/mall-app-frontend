@@ -54,30 +54,6 @@
     border-radius: 16px;
 }
 
-.voucherDetails {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    overflow: hidden;
-}
-
-.voucherDetails:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 20px var(--glow);
-}
-
-.discountText {
-    color: var(--dark-green);
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 12px 0;
-}
-
-.validityText {
-    color: var(--darker-green);
-    font-size: 0.9rem;
-    margin: 0;
-    opacity: 0.8;
-}
-
 @media (max-width: 1024px) {
     .vouchersGrid {
         grid-template-columns: repeat(2, 1fr);

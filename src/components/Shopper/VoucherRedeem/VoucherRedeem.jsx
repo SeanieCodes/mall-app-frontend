@@ -74,7 +74,7 @@ const VoucherRedeem = () => {
                 </header>
 
                 <main className="redeemContent">
-                    <VoucherDetails voucher={voucher} />
+                    <VoucherDetails voucher={voucher} isInteractive={false} />
                     
                     <button 
                         className="redeemButton"

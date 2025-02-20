@@ -38,7 +38,7 @@ const ShopperDashboard = () => {
                             onClick={() => navigate(`/shopper/voucher/${voucher.id}`)}
                             className="clickableVoucher"
                         >
-                            <VoucherDetails voucher={voucher} />
+                            <VoucherDetails voucher={voucher} isInteractive={true} />
                         </div>
                     ))}
                 </main>
