@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dropdown from './components/Common/Dropdown/Dropdown';
 import LoginForm from './components/Common/LoginForm/LoginForm';
@@ -9,10 +9,26 @@ import StaffDashboard from './components/Staff/StaffDashboard/StaffDashboard';
 import VoucherCreate from './components/Staff/VoucherCreate/VoucherCreate';
 import VoucherEdit from './components/Staff/VoucherEdit/VoucherEdit';
 import VoucherDetailsPage from './components/Staff/VoucherDetailsPage/VoucherDetailsPage';
+import * as voucherService from './services/voucherService'
+import { UserContext } from './contexts/UserContext';
 import './App.css';
 
 const App = () => {
     const [selectedType, setSelectedType] = useState('shopper');
+
+    const [vouchers, setVouchers] = useState([]);
+
+    useEffect(() => {
+      const fetchAllVouchers = async () => {
+        try {
+        const vouchersData = await voucherService.index();
+        setVouchers(vouchersData);
+      } catch (error) {
+        console.error("Error fetching vouchers:", error);
+    }}
+      ;
+      if (user) fetchAllVouchers();
+    }, [user]);
 
     return (
         <Router>
