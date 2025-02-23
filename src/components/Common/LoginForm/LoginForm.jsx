@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
+import { signIn } from './../../../services/authService'
+
 
 const LoginForm = ({ userType }) => {
     const navigate = useNavigate();
@@ -18,7 +20,7 @@ const LoginForm = ({ userType }) => {
         }));
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         
         if (!formData.username || !formData.password) {
@@ -29,26 +31,25 @@ const LoginForm = ({ userType }) => {
         setError('');
         
         try {
-            // mock code, put API call here to verify credentials later
-            const mockLoginSuccess = true;
-
-            if (mockLoginSuccess) {
-                localStorage.setItem('user', JSON.stringify({
-                    username: formData.username,
-                    role: userType
-                }));
-
+            const response = await signIn(formData);
+            if (response && response.token) {
+                localStorage.setItem(
+                    'user',
+                    JSON.stringify({
+                        username: response.username,
+                        role: response.role, 
+                    })
+                )
+                   localStorage.setItem('token', response.token);
+            }
                 if (userType === 'staff') {
                     navigate('/staff/dashboard');
                 } else {
                     navigate('/shopper/dashboard');
                 }
-            } else {
-                setError('Invalid credentials');
-            }
         } catch (err) {
-            setError('Login failed. Please try again.');
-            console.error('Login error:', err);
+            setError('An error occurred. Please try again later.');
+            console.error(err);
         }
     };
 
