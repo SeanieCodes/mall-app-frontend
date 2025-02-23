@@ -8,7 +8,8 @@ const SignupForm = ({ userType }) => {
     const [formData, setFormData] = useState({
         username: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        role: "shopper"
     });
     const [error, setError] = useState('');
 
@@ -20,7 +21,7 @@ const SignupForm = ({ userType }) => {
         }));
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         
         if (!formData.username || !formData.password || !formData.confirmPassword) {
@@ -40,8 +41,25 @@ const SignupForm = ({ userType }) => {
 
         setError('');
         
-        // registration logic later
-        console.log('Signup attempted:', { userType, ...formData });
+        try {
+            const response = await signUp(formData);
+    
+                localStorage.setItem(
+                    'user',
+                    JSON.stringify({
+                        username: formData.username,
+                        role: userType,
+                    })
+                );
+                if (userType === 'staff') {
+                    navigate('/staff/dashboard');
+                } else {
+                    navigate('/shopper/dashboard');
+                }
+        } catch (err) {
+            setError('An error occurred. Please try again later.');
+            console.error(err);
+        }
     };
 
     return (
