@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Dropdown from './components/Common/Dropdown/Dropdown';
+import LoginDropdown from './components/Common/LoginDropdown/LoginDropdown';
 import LoginForm from './components/Common/LoginForm/LoginForm';
 import SignupForm from './components/Shopper/SignupForm/SignupForm';
 import ShopperDashboard from './components/Shopper/ShopperDashboard/ShopperDashboard';
@@ -38,7 +38,7 @@ const App = () => {
                 element={
                     <div className="app-container">
                         <h1>Garden Grove</h1>
-                        <Dropdown onTypeChange={setSelectedType} />
+                        <LoginDropdown onTypeChange={setSelectedType} />
                         <LoginForm userType={selectedType} />
                     </div>
                 }
