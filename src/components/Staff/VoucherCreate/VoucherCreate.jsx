@@ -85,7 +85,7 @@ const VoucherCreate = () => {
 
           <form onSubmit={handleSubmit} className="voucherForm">
             <div className="formGroup">
-              <label htmlFor="storeName">Store Name*</label>
+              <label htmlFor="storeName">Store Name</label>
               <input
                 type="text"
                 id="storeName"
@@ -98,7 +98,7 @@ const VoucherCreate = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="discount">Discount*</label>
+              <label htmlFor="discount">Discount</label>
               <input
                 type="text"
                 id="discount"
@@ -111,7 +111,7 @@ const VoucherCreate = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="description">Description*</label>
+              <label htmlFor="description">Description</label>
               <textarea
                 id="description"
                 name="description"
@@ -148,7 +148,7 @@ const VoucherCreate = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="usagePerShopper">Usage Per Shopper*</label>
+              <label htmlFor="usagePerShopper">Usage Per Shopper</label>
               <input
                 type="number"
                 id="usagePerShopper"
@@ -161,7 +161,7 @@ const VoucherCreate = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="status">Voucher Status*</label>
+              <label htmlFor="status">Voucher Status</label>
               <select
                 id="status"
                 name="status"
