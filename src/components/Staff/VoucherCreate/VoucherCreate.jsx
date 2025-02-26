@@ -130,7 +130,7 @@ const VoucherCreate = () => {
                   type="date"
                   id="startDate"
                   name="startDate"
-                  value={formData.startDate}
+                  value={formData.startDate ? formData.startDate.split("T")[0] : ""}
                   onChange={handleInputChange}
                 />
               </div>
@@ -141,7 +141,7 @@ const VoucherCreate = () => {
                   type="date"
                   id="endDate"
                   name="endDate"
-                  value={formData.endDate}
+                  value={formData.endDate ? formData.endDate.split("T")[0] : ""}
                   onChange={handleInputChange}
                 />
               </div>
