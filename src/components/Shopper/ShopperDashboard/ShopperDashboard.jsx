@@ -3,28 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
 import VoucherDetails from '../../Common/VoucherDetails/VoucherDetails';
 import './ShopperDashboard.css';
+import { index } from '../../../services/voucherService';
 
 const ShopperDashboard = () => {
     const [username, setUsername] = useState('');
+    const [vouchers, setVouchers] = useState([]);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userData = JSON.parse(localStorage.getItem('user'));
-        if (userData) {
-            setUsername(userData.username);
-        }
-    }, []);
+      const userData = JSON.parse(localStorage.getItem("user"));
+      if (userData) {
+        setUsername(userData.username);
+      }
 
-    // Mock voucher data
-    const mockVouchers = Array(20).fill(null).map((_, index) => ({
-        id: index + 1,
-        storeName: `Store ${index + 1}`,
-        discount: '20% OFF',
-        description: `Special discount at Store ${index + 1}! Grab your deal now.`,
-        startDate: '2024-02-01',
-        endDate: '2024-12-31',
-        usagePerShopper: 1
-    }));    
+      const fetchAllVouchers = async () => {
+        try {
+            const vouchersData = await index();
+            console.log("Fetched Vouchers:", vouchersData); // Debugging
+            setVouchers(vouchersData);
+        } catch (error) {
+          console.error("Error fetching vouchers:", error);
+          setError("Failed to load vouchers.");
+        }
+      };
+
+      fetchAllVouchers();
+    }, []);
 
     return (
         <div className="mainBackground">
@@ -34,16 +39,28 @@ const ShopperDashboard = () => {
                     <SignoutButton />
                 </header>
 
+                {error && <p className="errorText">{error}</p>}
+
                 <main className="vouchersGrid">
-                    {mockVouchers.map(voucher => (
-                        <div 
-                            key={voucher.id} 
-                            onClick={() => navigate(`/shopper/voucher/${voucher.id}`)}
+                    {vouchers.length > 0 ? (
+                        vouchers.map(voucher => (
+                            <div 
+                            key={voucher._id} 
+                            onClick={() => navigate(`/shopper/voucher/${voucher._id}`)}
                             className="clickableVoucher"
+                            role="button"
+                            tabIndex="0"
                         >
-                            <VoucherDetails voucher={voucher} isInteractive={true} />
+                            {voucher ? (
+                                <VoucherDetails voucher={voucher} isInteractive={true} />
+                            ) : (
+                                <p className="voucherError">Error loading voucher.</p>
+                            )}
                         </div>
-                    ))}
+                        ))
+                    ) : (
+                        <p className="noVouchersText">No vouchers available.</p>
+                    )}
                 </main>
             </div>
         </div>

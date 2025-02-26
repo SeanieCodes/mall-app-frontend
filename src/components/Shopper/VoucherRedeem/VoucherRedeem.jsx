@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
 import VoucherDetails from '../../Common/VoucherDetails/VoucherDetails';
 import './VoucherRedeem.css';
+import { index } from '../../../services/voucherService';
+
 
 const VoucherRedeem = () => {
     const { id } = useParams();
@@ -13,23 +15,31 @@ const VoucherRedeem = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        // Get username from localStorage
         const userData = JSON.parse(localStorage.getItem('user'));
         if (userData) {
             setUsername(userData.username);
         }
 
-        // Mock fetching voucher data - replace with API call later
-        const mockVoucher = {
-          id: id,
-          storeName: "Example Store",
-          discount: "20% OFF",
-          description: "Get an exclusive 20% discount on all items at Example Store!",
-          startDate: "2024-02-01",
-          endDate: "2024-12-31",
-          usagePerShopper: 1
-      };      
-        setVoucher(mockVoucher);
+        const fetchVoucher = async () => {
+            try {
+                const data = await index();
+                if (data.error) {
+                    setError(data.error);
+                } else {
+                    const foundVoucher = data.find(v => v._id === id);
+                    if (foundVoucher) {
+                        setVoucher(foundVoucher);
+                    } else {
+                        setError('Voucher not found.');
+                    }
+                }
+            } catch (err) {
+                console.error('Error fetching voucher:', err);
+                setError('Failed to load voucher details.');
+            }
+        };
+
+        fetchVoucher();
     }, [id]);
 
     const handleRedeem = async () => {
