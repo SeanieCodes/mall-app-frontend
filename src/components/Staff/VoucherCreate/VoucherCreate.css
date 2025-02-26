@@ -86,7 +86,8 @@
     font-size: 1rem;
     transition: all 0.2s ease;
     background-color: var(--white);
-    color:black
+    color:black;
+    
 }
 
 .formGroup input:focus,
