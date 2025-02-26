@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
 import VoucherDetails from '../../Common/VoucherDetails/VoucherDetails';
 import './VoucherRedeem.css';
-import { index } from '../../../services/voucherService';
+import { index , redeem} from '../../../services/voucherService';
 
 
 const VoucherRedeem = () => {
@@ -46,19 +46,21 @@ const VoucherRedeem = () => {
         try {
             setIsRedeeming(true);
             setError('');
-
-            // Mock API call - replace with actual API call later
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Mock success
-            navigate('/shopper/dashboard');
-        } catch (err) {
+        
+            const result = await redeem(id); // Call the redeem function from voucherService
+        
+            if (result.error) {
+              setError(result.error); // Display the error if any
+            } else {
+              navigate('/shopper/dashboard'); // Navigate to the dashboard on successful redemption
+            }
+          } catch (err) {
             setError('Failed to redeem voucher. Please try again.');
             console.error('Redemption error:', err);
-        } finally {
+          } finally {
             setIsRedeeming(false);
-        }
-    };
+          }
+        };
 
     if (!voucher) {
         return (

@@ -78,4 +78,27 @@ const remove = async (voucherId) => {
   }
 };
 
-export { index, create, update, remove };
+const redeem = async (voucherId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/redeem/${voucherId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`, // Ensure the token is passed
+      },
+    });
+
+    // Check if the response is successful
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.err || 'Failed to redeem voucher. Please try again later.');
+    }
+
+    return res.json(); // Return the response data after successfully redeeming the voucher
+  } catch (error) {
+    console.error(error);
+    return { error: error.message }; // Handle any error that occurs
+  }
+};
+
+export { index, create, update, remove, redeem };
