@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
+import VoucherStatusDropdown from '../VoucherStatusDropdown/VoucherStatusDropdown';
 import './VoucherCreate.css';
 import { create } from '../../../services/voucherService';
 
@@ -32,6 +33,13 @@ const VoucherCreate = () => {
         setFormData(prevData => ({
             ...prevData,
             [name]: value
+        }));
+    };
+    
+    const handleStatusChange = (newStatus) => {
+        setFormData(prevData => ({
+            ...prevData,
+            status: newStatus
         }));
     };
 
@@ -161,17 +169,11 @@ const VoucherCreate = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="status">Voucher Status</label>
-              <select
-                id="status"
-                name="status"
+              <label htmlFor="voucherStatusSelect">Voucher Status</label>
+              <VoucherStatusDropdown
                 value={formData.status}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
+                onChange={handleStatusChange}
+              />
             </div>
 
             {error && <div className="errorMessage">{error}</div>}

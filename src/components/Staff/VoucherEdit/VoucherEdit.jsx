@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
+import VoucherStatusDropdown from '../VoucherStatusDropdown/VoucherStatusDropdown';
 import './VoucherEdit.css';
 import { update, remove } from '../../../services/voucherService';
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/vouchers`;
@@ -65,6 +66,13 @@ const VoucherEdit = () => {
         setFormData(prevData => ({
             ...prevData,
             [name]: value
+        }));
+    };
+    
+    const handleStatusChange = (newStatus) => {
+        setFormData(prevData => ({
+            ...prevData,
+            status: newStatus
         }));
     };
 
@@ -138,7 +146,7 @@ const VoucherEdit = () => {
 
           <form onSubmit={handleUpdate} className="voucherForm">
             <div className="formGroup">
-              <label htmlFor="storeName">Store Name*</label>
+              <label htmlFor="storeName">Store Name</label>
               <input
                 type="text"
                 id="storeName"
@@ -151,7 +159,7 @@ const VoucherEdit = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="discount">Discount*</label>
+              <label htmlFor="discount">Discount</label>
               <input
                 type="text"
                 id="discount"
@@ -164,7 +172,7 @@ const VoucherEdit = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="description">Description*</label>
+              <label htmlFor="description">Description</label>
               <textarea
                 id="description"
                 name="description"
@@ -201,7 +209,7 @@ const VoucherEdit = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="usagePerShopper">Usage Per Shopper*</label>
+              <label htmlFor="usagePerShopper">Usage Per Shopper</label>
               <input
                 type="number"
                 id="usagePerShopper"
@@ -212,18 +220,13 @@ const VoucherEdit = () => {
                 required
               />
             </div>
+            
             <div className="formGroup">
-              <label htmlFor="status">Voucher Status*</label>
-              <select
-                id="status"
-                name="status"
+              <label htmlFor="voucherStatusSelect">Voucher Status</label>
+              <VoucherStatusDropdown 
                 value={formData.status}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
+                onChange={handleStatusChange}
+              />
             </div>
 
             {error && <div className="errorMessage">{error}</div>}
