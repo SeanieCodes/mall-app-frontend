@@ -16,7 +16,7 @@ const VoucherCreate = () => {
         startDate: '',
         endDate: '',
         usagePerShopper: '',
-        status: 'active'
+        status: ''
     });
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
