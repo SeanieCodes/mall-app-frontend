@@ -8,7 +8,7 @@ import VoucherRedeem from './components/Shopper/VoucherRedeem/VoucherRedeem';
 import StaffDashboard from './components/Staff/StaffDashboard/StaffDashboard';
 import VoucherCreate from './components/Staff/VoucherCreate/VoucherCreate';
 import VoucherEdit from './components/Staff/VoucherEdit/VoucherEdit';
-import VoucherDetailsPage from './components/Staff/StaffVoucherDetailsPage/StaffVoucherDetailsPage';
+import StaffVoucherDetailsPage from './components/Staff/StaffVoucherDetailsPage/StaffVoucherDetailsPage';
 import * as voucherService from './services/voucherService';
 import { UserContext } from './contexts/UserContext';
 import './App.css';
@@ -69,7 +69,7 @@ const App = () => {
             />
             <Route 
                 path="/staff/voucher/:id" 
-                element={<VoucherDetailsPage />} 
+                element={<StaffVoucherDetailsPage />} 
             />
         </Routes>
     );
