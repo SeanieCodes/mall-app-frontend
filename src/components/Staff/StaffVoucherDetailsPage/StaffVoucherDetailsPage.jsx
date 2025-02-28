@@ -1,4 +1,4 @@
-const VoucherDetailsPage = () => {
+const StaffVoucherDetailsPage = () => {
   return (
     <div>
       Voucher Details Page - Coming Soon!
@@ -6,4 +6,4 @@ const VoucherDetailsPage = () => {
   );
 };
 
-export default VoucherDetailsPage;
+export default StaffVoucherDetailsPage;
