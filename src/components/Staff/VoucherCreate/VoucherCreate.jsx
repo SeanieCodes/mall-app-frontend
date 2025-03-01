@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
+import VoucherStatusDropdown from '../VoucherStatusDropdown/VoucherStatusDropdown';
 import './VoucherCreate.css';
 import { create } from '../../../services/voucherService';
 
@@ -15,7 +16,7 @@ const VoucherCreate = () => {
         startDate: '',
         endDate: '',
         usagePerShopper: '',
-        status: 'active'
+        status: ''
     });
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,6 +33,13 @@ const VoucherCreate = () => {
         setFormData(prevData => ({
             ...prevData,
             [name]: value
+        }));
+    };
+    
+    const handleStatusChange = (newStatus) => {
+        setFormData(prevData => ({
+            ...prevData,
+            status: newStatus
         }));
     };
 
@@ -85,7 +93,7 @@ const VoucherCreate = () => {
 
           <form onSubmit={handleSubmit} className="voucherForm">
             <div className="formGroup">
-              <label htmlFor="storeName">Store Name*</label>
+              <label htmlFor="storeName">Store Name</label>
               <input
                 type="text"
                 id="storeName"
@@ -98,7 +106,7 @@ const VoucherCreate = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="discount">Discount*</label>
+              <label htmlFor="discount">Discount</label>
               <input
                 type="text"
                 id="discount"
@@ -111,7 +119,7 @@ const VoucherCreate = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="description">Description*</label>
+              <label htmlFor="description">Description</label>
               <textarea
                 id="description"
                 name="description"
@@ -148,7 +156,7 @@ const VoucherCreate = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="usagePerShopper">Usage Per Shopper*</label>
+              <label htmlFor="usagePerShopper">Usage Per Shopper</label>
               <input
                 type="number"
                 id="usagePerShopper"
@@ -161,17 +169,11 @@ const VoucherCreate = () => {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="status">Voucher Status*</label>
-              <select
-                id="status"
-                name="status"
+              <label htmlFor="voucherStatusSelect">Voucher Status</label>
+              <VoucherStatusDropdown
                 value={formData.status}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
+                onChange={handleStatusChange}
+              />
             </div>
 
             {error && <div className="errorMessage">{error}</div>}

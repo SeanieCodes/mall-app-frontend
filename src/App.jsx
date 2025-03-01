@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Dropdown from './components/Common/Dropdown/Dropdown';
+import LoginDropdown from './components/Common/LoginDropdown/LoginDropdown';
 import LoginForm from './components/Common/LoginForm/LoginForm';
 import SignupForm from './components/Shopper/SignupForm/SignupForm';
 import ShopperDashboard from './components/Shopper/ShopperDashboard/ShopperDashboard';
@@ -8,7 +8,7 @@ import VoucherRedeem from './components/Shopper/VoucherRedeem/VoucherRedeem';
 import StaffDashboard from './components/Staff/StaffDashboard/StaffDashboard';
 import VoucherCreate from './components/Staff/VoucherCreate/VoucherCreate';
 import VoucherEdit from './components/Staff/VoucherEdit/VoucherEdit';
-import VoucherDetailsPage from './components/Staff/VoucherDetailsPage/VoucherDetailsPage';
+import StaffVoucherDetailsPage from './components/Staff/StaffVoucherDetailsPage/StaffVoucherDetailsPage';
 import * as voucherService from './services/voucherService';
 import { UserContext } from './contexts/UserContext';
 import './App.css';
@@ -38,7 +38,7 @@ const App = () => {
                 element={
                     <div className="app-container">
                         <h1>Garden Grove</h1>
-                        <Dropdown onTypeChange={setSelectedType} />
+                        <LoginDropdown onTypeChange={setSelectedType} />
                         <LoginForm userType={selectedType} />
                     </div>
                 }
@@ -69,7 +69,7 @@ const App = () => {
             />
             <Route 
                 path="/staff/voucher/:id" 
-                element={<VoucherDetailsPage />} 
+                element={<StaffVoucherDetailsPage />} 
             />
         </Routes>
     );
