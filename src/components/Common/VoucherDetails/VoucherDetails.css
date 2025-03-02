@@ -45,3 +45,11 @@
     font-size: 0.9rem;
     margin: 16px 0 0 0;
 }
+
+.description {
+    color: var(--darker-green);
+}
+
+.usageLimit {
+    color: var(--darker-green);
+}
