@@ -18,7 +18,7 @@ const VoucherEdit = () => {
         description: '',
         startDate: '',
         endDate: '',
-        usagePerShopper: '',
+        redemptionsPerShopper: '',
         status: ''
     });
     const [error, setError] = useState('');
@@ -90,7 +90,7 @@ const VoucherEdit = () => {
         setError('');
         setIsSubmitting(true);
         
-        if (!formData.storeName || !formData.discount || !formData.description || !formData.usagePerShopper) {
+        if (!formData.storeName || !formData.discount || !formData.description || !formData.redemptionsPerShopper) {
             setError('Please fill in all required fields.');
             setIsSubmitting(false);
             return;
@@ -200,12 +200,12 @@ const VoucherEdit = () => {
             />
 
             <div className="formGroup">
-              <label htmlFor="usagePerShopper">Usage Per Shopper</label>
+              <label htmlFor="redemptionsPerShopper">Redemptions Per Shopper</label>
               <input
                 type="number"
-                id="usagePerShopper"
-                name="usagePerShopper"
-                value={formData.usagePerShopper}
+                id="redemptionsPerShopper"
+                name="redemptionsPerShopper"
+                value={formData.redemptionsPerShopper}
                 onChange={handleInputChange}
                 min="1"
                 required
