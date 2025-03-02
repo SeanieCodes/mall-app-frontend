@@ -25,7 +25,7 @@ const VoucherDetails = ({ voucher, isInteractive = false }) => {
             </p>
 
             <p className="usageLimit">
-                Usage per shopper: {voucher.usagePerShopper}
+                Redemptions per shopper: {voucher.redemptionsPerShopper}
             </p>
         </div>
     );

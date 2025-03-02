@@ -2,14 +2,14 @@ import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import './LoginDropdown.css';
 
-const Dropdown = ({onTypeChange}) => {
-
+const LoginDropdown = ({onTypeChange}) => {
   const navigate = useNavigate();
 
   const options = [
     { value: 'shopper', label: 'Shopper' },
     { value: 'staff', label: 'Staff' }
   ];
+  
   const handleChange = (option) => {
     onTypeChange(option.value);
   };
@@ -17,11 +17,13 @@ const Dropdown = ({onTypeChange}) => {
   return (
     <Select
       options={options}
-      defaultValue={options[0]}
+      defaultValue={null}
       onChange={handleChange}
       classNamePrefix="select"
+      placeholder="Select user type..."
+      isClearable={false}
     />
   );
 };
 
-export default Dropdown;
+export default LoginDropdown;

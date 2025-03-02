@@ -16,8 +16,8 @@ const UsageDetails = ({ voucher }) => {
 
     const totalRedemptions = voucher.redeemedBy?.length || 0;
     const uniqueUsers = new Set(voucher.redeemedBy?.map(redemption => redemption.user) || []).size;
-    const usagePercentage = voucher.usagePerShopper > 0 
-        ? Math.round((totalRedemptions / voucher.usagePerShopper) * 100) 
+    const usagePercentage = voucher.redemptionsPerShopper > 0 
+        ? Math.round((totalRedemptions / voucher.redemptionsPerShopper) * 100) 
         : 0;
 
     return (

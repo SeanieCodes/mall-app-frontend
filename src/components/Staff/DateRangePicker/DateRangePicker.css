@@ -1,0 +1,89 @@
+.date-range-picker {
+    margin-bottom: 24px;
+}
+
+.date-range-picker h3 {
+    color: var(--darker-green);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.react-datepicker {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    border: 2px solid var(--primary-green) !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    width: 100%;
+}
+
+.react-datepicker__month-container {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.react-datepicker__header {
+    background-color: var(--primary-green) !important;
+    border-bottom: none !important;
+    padding-top: 12px !important;
+}
+
+.react-datepicker__current-month {
+    color: var(--darker-green) !important;
+    font-weight: 500 !important;
+}
+
+.react-datepicker__day-name {
+    color: var(--darker-green) !important;
+    font-weight: 500 !important;
+}
+
+.react-datepicker__day {
+    color: var(--darker-green) !important;
+    border-radius: 50% !important;
+    margin: 0.2rem !important;
+}
+
+.react-datepicker__day:hover {
+    background-color: var(--light-green) !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+    background-color: var(--primary-green) !important;
+    color: var(--darker-green) !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+    background-color: var(--primary-green) !important;
+    color: var(--darker-green) !important;
+}
+
+.react-datepicker__day--today {
+    font-weight: bold !important;
+    color: var(--primary-green) !important;
+}
+
+.react-datepicker__day--disabled {
+    color: #ccc !important;
+}
+
+.react-datepicker__navigation {
+    top: 12px !important;
+}
+
+.react-datepicker__navigation-icon::before {
+    border-color: var(--darker-green) !important;
+}
+
+@media (max-width: 768px) {
+    .react-datepicker__month-container {
+        width: 100%;
+    }
+    
+    .react-datepicker {
+        width: 100%;
+    }
+}

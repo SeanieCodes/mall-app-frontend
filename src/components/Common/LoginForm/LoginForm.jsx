@@ -60,7 +60,7 @@ const LoginForm = ({ userType }) => {
             <form onSubmit={handleSubmit} className="loginForm">
                 <div className="formGroup">
                     <label htmlFor="username">
-                        {userType === 'staff' ? 'Staff Username' : 'Shopper Username'}
+                        Username
                     </label>
                     <input
                         type="text"
@@ -68,13 +68,13 @@ const LoginForm = ({ userType }) => {
                         name="username"
                         value={formData.username}
                         onChange={handleInputChange}
-                        placeholder={`Enter ${userType} username`}
+                        placeholder={`Enter username`}
                     />
                 </div>
 
                 <div className="formGroup">
                     <label htmlFor="password">
-                        {userType === 'staff' ? 'Staff Password' : 'Shopper Password'}
+                        Password
                     </label>
                     <input
                         type="password"

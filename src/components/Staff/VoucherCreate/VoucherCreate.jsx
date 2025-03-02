@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
 import VoucherStatusDropdown from '../VoucherStatusDropdown/VoucherStatusDropdown';
+import DateRangePicker from '../DateRangePicker/DateRangePicker';
 import './VoucherCreate.css';
 import { create } from '../../../services/voucherService';
 
@@ -15,7 +16,7 @@ const VoucherCreate = () => {
         description: '',
         startDate: '',
         endDate: '',
-        usagePerShopper: '',
+        redemptionsPerShopper: '',
         status: ''
     });
     const [error, setError] = useState('');
@@ -36,6 +37,14 @@ const VoucherCreate = () => {
         }));
     };
     
+    const handleDateChange = (dates) => {
+        setFormData(prevData => ({
+            ...prevData,
+            startDate: dates.startDate,
+            endDate: dates.endDate
+        }));
+    };
+    
     const handleStatusChange = (newStatus) => {
         setFormData(prevData => ({
             ...prevData,
@@ -47,7 +56,7 @@ const VoucherCreate = () => {
         event.preventDefault();
         setError('');
         setIsSubmitting(true);
-        if (!formData.storeName || !formData.discount || !formData.description || !formData.usagePerShopper) {
+        if (!formData.storeName || !formData.discount || !formData.description || !formData.redemptionsPerShopper) {
             setError('Please fill in all required fields.');
             setIsSubmitting(false);
             return;
@@ -131,37 +140,19 @@ const VoucherCreate = () => {
               />
             </div>
 
-            <div className="dateGroup">
-              <div className="formGroup">
-                <label htmlFor="startDate">Start Date</label>
-                <input
-                  type="date"
-                  id="startDate"
-                  name="startDate"
-                  value={formData.startDate ? formData.startDate.split("T")[0] : ""}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="formGroup">
-                <label htmlFor="endDate">End Date</label>
-                <input
-                  type="date"
-                  id="endDate"
-                  name="endDate"
-                  value={formData.endDate ? formData.endDate.split("T")[0] : ""}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
+            <DateRangePicker
+              startDate={formData.startDate}
+              endDate={formData.endDate}
+              onDateChange={handleDateChange}
+            />
 
             <div className="formGroup">
-              <label htmlFor="usagePerShopper">Usage Per Shopper</label>
+              <label htmlFor="redemptionsPerShopper">Redemptions Per Shopper</label>
               <input
                 type="number"
-                id="usagePerShopper"
-                name="usagePerShopper"
-                value={formData.usagePerShopper}
+                id="redemptionsPerShopper"
+                name="redemptionsPerShopper"
+                value={formData.redemptionsPerShopper}
                 onChange={handleInputChange}
                 min="1"
                 required
