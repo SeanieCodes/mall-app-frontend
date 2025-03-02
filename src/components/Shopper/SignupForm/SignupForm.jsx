@@ -66,12 +66,12 @@ const SignupForm = ({ userType }) => {
         <div className="app-container">
             <h1>Garden Grove</h1>
             <div className="signupContainer">
-                <h2>Create {userType === 'staff' ? 'Staff' : 'Shopper'} Account</h2>
+                <h2>Create Account</h2>
                 
                 <form onSubmit={handleSubmit} className="signupForm">
                     <div className="formGroup">
                         <label htmlFor="username">
-                            {userType === 'staff' ? 'Staff Username' : 'Shopper Username'}
+                            Username
                         </label>
                         <input
                             type="text"
@@ -79,7 +79,7 @@ const SignupForm = ({ userType }) => {
                             name="username"
                             value={formData.username}
                             onChange={handleInputChange}
-                            placeholder="Choose a username"
+                            placeholder="Choose your username"
                         />
                     </div>
 
@@ -91,7 +91,7 @@ const SignupForm = ({ userType }) => {
                             name="password"
                             value={formData.password}
                             onChange={handleInputChange}
-                            placeholder="Choose a password"
+                            placeholder="Choose your password"
                         />
                     </div>
 
