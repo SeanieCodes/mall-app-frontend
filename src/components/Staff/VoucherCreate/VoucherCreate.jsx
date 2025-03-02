@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
 import VoucherStatusDropdown from '../VoucherStatusDropdown/VoucherStatusDropdown';
+import DateRangePicker from '../DateRangePicker/DateRangePicker';
 import './VoucherCreate.css';
 import { create } from '../../../services/voucherService';
 
@@ -33,6 +34,14 @@ const VoucherCreate = () => {
         setFormData(prevData => ({
             ...prevData,
             [name]: value
+        }));
+    };
+    
+    const handleDateChange = (dates) => {
+        setFormData(prevData => ({
+            ...prevData,
+            startDate: dates.startDate,
+            endDate: dates.endDate
         }));
     };
     
@@ -131,29 +140,11 @@ const VoucherCreate = () => {
               />
             </div>
 
-            <div className="dateGroup">
-              <div className="formGroup">
-                <label htmlFor="startDate">Start Date</label>
-                <input
-                  type="date"
-                  id="startDate"
-                  name="startDate"
-                  value={formData.startDate ? formData.startDate.split("T")[0] : ""}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="formGroup">
-                <label htmlFor="endDate">End Date</label>
-                <input
-                  type="date"
-                  id="endDate"
-                  name="endDate"
-                  value={formData.endDate ? formData.endDate.split("T")[0] : ""}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
+            <DateRangePicker
+              startDate={formData.startDate}
+              endDate={formData.endDate}
+              onDateChange={handleDateChange}
+            />
 
             <div className="formGroup">
               <label htmlFor="usagePerShopper">Usage Per Shopper</label>

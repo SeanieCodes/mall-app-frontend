@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import SignoutButton from '../../Common/SignoutButton/SignoutButton';
 import VoucherStatusDropdown from '../VoucherStatusDropdown/VoucherStatusDropdown';
+import DateRangePicker from '../DateRangePicker/DateRangePicker';
 import './VoucherEdit.css';
 import { update, remove } from '../../../services/voucherService';
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/vouchers`;
@@ -66,6 +67,14 @@ const VoucherEdit = () => {
         setFormData(prevData => ({
             ...prevData,
             [name]: value
+        }));
+    };
+    
+    const handleDateChange = (dates) => {
+        setFormData(prevData => ({
+            ...prevData,
+            startDate: dates.startDate,
+            endDate: dates.endDate
         }));
     };
     
@@ -184,29 +193,11 @@ const VoucherEdit = () => {
               />
             </div>
 
-            <div className="dateGroup">
-              <div className="formGroup">
-                <label htmlFor="startDate">Start Date</label>
-                <input
-                  type="date"
-                  id="startDate"
-                  name="startDate"
-                  value={formData.startDate ? formData.startDate.split("T")[0] : ""}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="formGroup">
-                <label htmlFor="endDate">End Date</label>
-                <input
-                  type="date"
-                  id="endDate"
-                  name="endDate"
-                  value={formData.endDate ? formData.endDate.split("T")[0] : ""}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
+            <DateRangePicker
+              startDate={formData.startDate}
+              endDate={formData.endDate}
+              onDateChange={handleDateChange}
+            />
 
             <div className="formGroup">
               <label htmlFor="usagePerShopper">Usage Per Shopper</label>
