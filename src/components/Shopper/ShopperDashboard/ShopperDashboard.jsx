@@ -7,6 +7,7 @@ import { index } from '../../../services/voucherService';
 
 const ShopperDashboard = () => {
     const [username, setUsername] = useState('');
+    const [userId, setUserId] = useState('');
     const [vouchers, setVouchers] = useState([]);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -15,12 +16,14 @@ const ShopperDashboard = () => {
       const userData = JSON.parse(localStorage.getItem("user"));
       if (userData) {
         setUsername(userData.username);
+        if (userData._id) {
+          setUserId(userData._id);
+        }
       }
 
       const fetchAllVouchers = async () => {
         try {
             const vouchersData = await index();
-            console.log("Fetched Vouchers:", vouchersData); // Debugging
             setVouchers(vouchersData);
         } catch (error) {
           console.error("Error fetching vouchers:", error);
@@ -30,6 +33,13 @@ const ShopperDashboard = () => {
 
       fetchAllVouchers();
     }, []);
+
+    const currentDate = new Date();
+    
+    const availableVouchers = vouchers.filter(voucher => {
+      return voucher.status === 'active' && 
+        (!voucher.endDate || new Date(voucher.endDate) > currentDate);
+    });
 
     return (
         <div className="mainBackground">
@@ -42,8 +52,8 @@ const ShopperDashboard = () => {
                 {error && <p className="errorText">{error}</p>}
 
                 <main className="vouchersGrid">
-                    {vouchers.length > 0 ? (
-                        vouchers.map(voucher => (
+                    {availableVouchers.length > 0 ? (
+                        availableVouchers.map(voucher => (
                             <div 
                             key={voucher._id} 
                             onClick={() => navigate(`/shopper/voucher/${voucher._id}`)}
