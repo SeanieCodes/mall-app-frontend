@@ -33,8 +33,8 @@ const VoucherRedeem = () => {
                         setError('Voucher not found.');
                     }
                 }
-            } catch (err) {
-                console.error('Error fetching voucher:', err);
+            } catch (error) {
+                console.error('Error fetching voucher:', error);
                 setError('Failed to load voucher details.');
             }
         };
@@ -54,9 +54,9 @@ const VoucherRedeem = () => {
             } else {
               navigate('/shopper/dashboard'); // Navigate to the dashboard on successful redemption
             }
-          } catch (err) {
+          } catch (error) {
             setError('Failed to redeem voucher. Please try again.');
-            console.error('Redemption error:', err);
+            console.error('Redemption error:', error);
           } finally {
             setIsRedeeming(false);
           }

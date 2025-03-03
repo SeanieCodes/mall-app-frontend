@@ -56,9 +56,9 @@ const SignupForm = ({ userType }) => {
                 } else {
                     navigate('/shopper/dashboard');
                 }
-        } catch (err) {
+        } catch (error) {
             setError('An error occurred. Please try again later.');
-            console.error(err);
+            console.error(error);
         }
     };
 
