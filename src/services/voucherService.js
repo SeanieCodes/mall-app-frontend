@@ -91,7 +91,7 @@ const redeem = async (voucherId) => {
     // Check if the response is successful
     if (!res.ok) {
       const errorData = await res.json();
-      throw new Error(errorData.err || 'Failed to redeem voucher. Please try again later.');
+      throw new Error(errorData.error || 'Failed to redeem voucher. Please try again later.');
     }
 
     return res.json(); // Return the response data after successfully redeeming the voucher

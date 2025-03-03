@@ -37,9 +37,17 @@ const ShopperDashboard = () => {
     const currentDate = new Date();
     
     const availableVouchers = vouchers.filter(voucher => {
-      return voucher.status === 'active' && 
-        (!voucher.endDate || new Date(voucher.endDate) > currentDate);
-    });
+        if (voucher.status !== 'active' || (voucher.endDate && new Date(voucher.endDate) < currentDate)) {
+          return false;
+        }
+        
+        const userRedemptionCount = voucher.redeemedBy
+          ? voucher.redeemedBy.filter(redemption => redemption.user.toString() === userId.toString()).length
+          : 0;
+        
+        return userRedemptionCount < voucher.redemptionsPerShopper;
+      });
+      
 
     return (
         <div className="mainBackground">
