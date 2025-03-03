@@ -41,19 +41,21 @@ const signIn = async (formData) => {
 
     if (data.token) {
       localStorage.setItem('token', data.token);
-      const decodedPayload = JSON.parse(atob(data.token.split('.')[1])).payload;
-
+      
+      const decoded = JSON.parse(atob(data.token.split('.')[1]));
+      
       localStorage.setItem('user', JSON.stringify({
         username: data.user.username,
-        role: data.user.role   
+        role: data.user.role,
+        _id: decoded._id
       }));
 
       return {
-        payload: decodedPayload, 
         username: data.user.username,
-        role: data.user.role      
-    };
-  }
+        role: data.user.role,
+        _id: decoded._id
+      };
+    }
 
     throw new Error('Invalid response from server');
   } catch (error) {

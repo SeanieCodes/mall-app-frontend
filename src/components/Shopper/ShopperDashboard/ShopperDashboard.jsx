@@ -13,13 +13,15 @@ const ShopperDashboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-      const userData = JSON.parse(localStorage.getItem("user"));
-      if (userData) {
-        setUsername(userData.username);
-        if (userData._id) {
-          setUserId(userData._id);
+        const userData = JSON.parse(localStorage.getItem("user"));
+        if (userData) {
+          setUsername(userData.username);
+          if (userData._id) {
+            setUserId(userData._id);
+          } else {
+            console.warn("No user ID found in localStorage");
+          }
         }
-      }
 
       const fetchAllVouchers = async () => {
         try {
@@ -42,12 +44,14 @@ const ShopperDashboard = () => {
         }
         
         const userRedemptionCount = voucher.redeemedBy
-          ? voucher.redeemedBy.filter(redemption => redemption.user.toString() === userId.toString()).length
+          ? voucher.redeemedBy.filter(redemption => {
+              console.log("Comparing:", redemption.user, userId);
+              return redemption.user.toString() === userId.toString();
+            }).length
           : 0;
-        
+                
         return userRedemptionCount < voucher.redemptionsPerShopper;
-      });
-      
+    });
 
     return (
         <div className="mainBackground">
