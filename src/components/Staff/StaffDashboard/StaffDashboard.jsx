@@ -20,7 +20,6 @@ const StaffDashboard = () => {
         const fetchAllVouchers = async () => {
             try {
                 const vouchersData = await index();
-                console.log("Fetched Vouchers:", vouchersData); // Debugging
                 setVouchers(vouchersData);
             } catch (error) {
                 console.error("Error fetching vouchers:", error);
@@ -31,10 +30,21 @@ const StaffDashboard = () => {
         fetchAllVouchers();
     }, []);
 
-    // Filter vouchers by status
-    const activeVouchers = vouchers.filter(voucher => voucher.status === 'active');
-    const inactiveVouchers = vouchers.filter(voucher => voucher.status === 'inactive');
-    const expiredVouchers = vouchers.filter(voucher => voucher.status === 'expired');
+    const currentDate = new Date();
+
+    const activeVouchers = vouchers.filter(voucher => {
+        return voucher.status === 'active' && 
+            (!voucher.endDate || new Date(voucher.endDate) > currentDate);
+    });
+
+    const inactiveVouchers = vouchers.filter(voucher => 
+        voucher.status === 'inactive'
+    );
+
+    const expiredVouchers = vouchers.filter(voucher => {
+        return voucher.status === 'expired' || 
+            (voucher.endDate && new Date(voucher.endDate) < currentDate && voucher.status === 'active');
+    });
 
     return (
         <div className="mainBackground">

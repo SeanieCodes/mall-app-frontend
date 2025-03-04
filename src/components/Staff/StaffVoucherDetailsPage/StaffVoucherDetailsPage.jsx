@@ -34,8 +34,8 @@ const VoucherDetailsPage = () => {
                         setError('Voucher not found.');
                     }
                 }
-            } catch (err) {
-                console.error('Error fetching voucher:', err);
+            } catch (error) {
+                console.error('Error fetching voucher:', error);
                 setError('Failed to load voucher details.');
             } finally {
                 setIsLoading(false);

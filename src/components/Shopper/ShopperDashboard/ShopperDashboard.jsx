@@ -7,20 +7,25 @@ import { index } from '../../../services/voucherService';
 
 const ShopperDashboard = () => {
     const [username, setUsername] = useState('');
+    const [userId, setUserId] = useState('');
     const [vouchers, setVouchers] = useState([]);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-      const userData = JSON.parse(localStorage.getItem("user"));
-      if (userData) {
-        setUsername(userData.username);
-      }
+        const userData = JSON.parse(localStorage.getItem("user"));
+        if (userData) {
+          setUsername(userData.username);
+          if (userData._id) {
+            setUserId(userData._id);
+          } else {
+            console.warn("No user ID found in localStorage");
+          }
+        }
 
       const fetchAllVouchers = async () => {
         try {
             const vouchersData = await index();
-            console.log("Fetched Vouchers:", vouchersData); // Debugging
             setVouchers(vouchersData);
         } catch (error) {
           console.error("Error fetching vouchers:", error);
@@ -30,6 +35,23 @@ const ShopperDashboard = () => {
 
       fetchAllVouchers();
     }, []);
+
+    const currentDate = new Date();
+    
+    const availableVouchers = vouchers.filter(voucher => {
+        if (voucher.status !== 'active' || (voucher.endDate && new Date(voucher.endDate) < currentDate)) {
+          return false;
+        }
+        
+        const userRedemptionCount = voucher.redeemedBy
+          ? voucher.redeemedBy.filter(redemption => {
+              console.log("Comparing:", redemption.user, userId);
+              return redemption.user.toString() === userId.toString();
+            }).length
+          : 0;
+                
+        return userRedemptionCount < voucher.redemptionsPerShopper;
+    });
 
     return (
         <div className="mainBackground">
@@ -42,8 +64,8 @@ const ShopperDashboard = () => {
                 {error && <p className="errorText">{error}</p>}
 
                 <main className="vouchersGrid">
-                    {vouchers.length > 0 ? (
-                        vouchers.map(voucher => (
+                    {availableVouchers.length > 0 ? (
+                        availableVouchers.map(voucher => (
                             <div 
                             key={voucher._id} 
                             onClick={() => navigate(`/shopper/voucher/${voucher._id}`)}
