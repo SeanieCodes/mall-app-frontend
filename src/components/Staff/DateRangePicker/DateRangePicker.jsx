@@ -18,9 +18,9 @@ const DateRangePicker = ({ startDate, endDate, onDateChange }) => {
     const handleDateChange = (update) => {
         setDateRange(update);
         
-        const formattedStartDate = update[0] ? update[0].toISOString().split('T')[0] : '';
-        const formattedEndDate = update[1] ? update[1].toISOString().split('T')[0] : '';
-        
+    const formattedStartDate = update[0] ? update[0].toLocaleDateString('en-CA') : ''; 
+    const formattedEndDate = update[1] ? update[1].toLocaleDateString('en-CA') : '';
+
         onDateChange({
             startDate: formattedStartDate,
             endDate: formattedEndDate

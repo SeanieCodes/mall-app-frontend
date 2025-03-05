@@ -63,7 +63,6 @@
 
 .react-datepicker__day--today {
     font-weight: bold !important;
-    color: var(--primary-green) !important;
 }
 
 .react-datepicker__day--disabled {
