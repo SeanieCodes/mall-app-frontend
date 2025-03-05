@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUp } from './../../../services/authService'
+import { signUp } from '../../../services/authService';
 import './SignupForm.css';
 
 const SignupForm = ({ userType }) => {
@@ -9,9 +9,10 @@ const SignupForm = ({ userType }) => {
         username: '',
         password: '',
         confirmPassword: '',
-        role: "shopper"
+        role: 'shopper' // Default to shopper
     });
     const [error, setError] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -40,25 +41,38 @@ const SignupForm = ({ userType }) => {
         }
 
         setError('');
+        setIsSubmitting(true);
         
         try {
-            const response = await signUp(formData);
+            // Only shoppers can sign up, staff accounts are pre-created
+            if (userType !== 'shopper') {
+                setError('Only shoppers can sign up for new accounts.');
+                setIsSubmitting(false);
+                return;
+            }
+            
+            const response = await signUp({
+                username: formData.username,
+                password: formData.password,
+                role: 'shopper'
+            });
     
+            if (response) {
                 localStorage.setItem(
                     'user',
                     JSON.stringify({
                         username: formData.username,
-                        role: userType,
+                        role: 'shopper',
+                        _id: response._id
                     })
                 );
-                if (userType === 'staff') {
-                    navigate('/staff/dashboard');
-                } else {
-                    navigate('/shopper/dashboard');
-                }
+                navigate('/shopper/dashboard');
+            }
         } catch (error) {
-            setError('An error occurred. Please try again later.');
+            setError('Username may already be taken or an error occurred. Please try again later.');
             console.error(error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -66,7 +80,7 @@ const SignupForm = ({ userType }) => {
         <div className="app-container">
             <h1>Garden Grove</h1>
             <div className="signupContainer">
-                <h2>Create Account</h2>
+                <h2>Create Shopper Account</h2>
                 
                 <form onSubmit={handleSubmit} className="signupForm">
                     <div className="formGroup">
@@ -80,6 +94,7 @@ const SignupForm = ({ userType }) => {
                             value={formData.username}
                             onChange={handleInputChange}
                             placeholder="Choose your username"
+                            required
                         />
                     </div>
 
@@ -92,6 +107,7 @@ const SignupForm = ({ userType }) => {
                             value={formData.password}
                             onChange={handleInputChange}
                             placeholder="Choose your password"
+                            required
                         />
                     </div>
 
@@ -104,13 +120,18 @@ const SignupForm = ({ userType }) => {
                             value={formData.confirmPassword}
                             onChange={handleInputChange}
                             placeholder="Confirm your password"
+                            required
                         />
                     </div>
 
                     {error && <div className="errorMessage">{error}</div>}
 
-                    <button type="submit" className="signupButton">
-                        Create Account
+                    <button 
+                        type="submit" 
+                        className="signupButton"
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? 'Creating Account...' : 'Create Account'}
                     </button>
 
                     <p className="loginPrompt">

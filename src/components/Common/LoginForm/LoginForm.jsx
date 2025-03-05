@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
-import { signIn } from './../../../services/authService'
-
+import { signIn } from '../../../services/authService';
+import { UserContext } from '../../../contexts/UserContext';
 
 const LoginForm = ({ userType }) => {
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     });
     const [error, setError] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -29,27 +31,49 @@ const LoginForm = ({ userType }) => {
         }
 
         setError('');
+        setIsSubmitting(true);
         
         try {
             const response = await signIn(formData);
+            
             if (response && response.token) {
+                // Check if the user's role matches the selected user type
+                if (response.role !== userType) {
+                    setError(`This account doesn't have ${userType} permissions. Please use the correct login type.`);
+                    setIsSubmitting(false);
+                    return;
+                }
+                
+                // Store user info in localStorage
                 localStorage.setItem(
                     'user',
                     JSON.stringify({
                         username: response.username,
-                        role: response.role, 
+                        role: response.role,
+                        _id: response._id
                     })
-                )
-                   localStorage.setItem('token', response.token);
-            }
-                if (userType === 'staff') {
+                );
+                localStorage.setItem('token', response.token);
+                
+                // Update context
+                setUser({
+                    username: response.username,
+                    role: response.role,
+                    _id: response._id
+                });
+                
+                // Navigate based on role
+                if (response.role === 'staff') {
                     navigate('/staff/dashboard');
                 } else {
                     navigate('/shopper/dashboard');
                 }
+            }
         } catch (error) {
-            setError('An error occurred. Please try again later.');
+            setError('Invalid username or password. Please try again.');
             console.error(error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -68,7 +92,8 @@ const LoginForm = ({ userType }) => {
                         name="username"
                         value={formData.username}
                         onChange={handleInputChange}
-                        placeholder={`Enter username`}
+                        placeholder="Enter username"
+                        required
                     />
                 </div>
 
@@ -83,13 +108,18 @@ const LoginForm = ({ userType }) => {
                         value={formData.password}
                         onChange={handleInputChange}
                         placeholder="Enter password"
+                        required
                     />
                 </div>
 
                 {error && <div className="errorMessage">{error}</div>}
 
-                <button type="submit" className="loginButton">
-                    Log In
+                <button 
+                    type="submit" 
+                    className="loginButton"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Logging in...' : 'Log In'}
                 </button>
 
                 {userType === 'shopper' && (

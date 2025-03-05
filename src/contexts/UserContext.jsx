@@ -1,25 +1,38 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
-const UserContext = createContext();
+export const UserContext = createContext(null);
 
-const getUserFromToken = () => {
-  const token = localStorage.getItem('token');
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  if (!token) return null;
+  useEffect(() => {
+    // Check if user data exists in localStorage when the app loads
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        localStorage.removeItem('user');
+      }
+    }
+    setIsLoading(false);
+  }, []);
 
-  return JSON.parse(atob(token.split('.')[1])).payload;
-};
+  const logout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    setUser(null);
+  };
 
-function UserProvider({ children }) {
-  const [user, setUser] = useState(getUserFromToken());
-
-  const value = { user, setUser };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <UserContext.Provider value={value}>
+    <UserContext.Provider value={{ user, setUser, logout }}>
       {children}
     </UserContext.Provider>
   );
 };
-
-export { UserProvider, UserContext };

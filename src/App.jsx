@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginDropdown from './components/Common/LoginDropdown/LoginDropdown';
 import LoginForm from './components/Common/LoginForm/LoginForm';
 import SignupForm from './components/Shopper/SignupForm/SignupForm';
@@ -9,6 +9,7 @@ import StaffDashboard from './components/Staff/StaffDashboard/StaffDashboard';
 import VoucherCreate from './components/Staff/VoucherCreate/VoucherCreate';
 import VoucherEdit from './components/Staff/VoucherEdit/VoucherEdit';
 import StaffVoucherDetailsPage from './components/Staff/StaffVoucherDetailsPage/StaffVoucherDetailsPage';
+import ProtectedRoute from './components/Common/ProtectedRoute/ProtectedRoute';
 import * as voucherService from './services/voucherService';
 import { UserContext } from './contexts/UserContext';
 import './App.css';
@@ -36,40 +37,72 @@ const App = () => {
             <Route 
                 path="/" 
                 element={
-                    <div className="app-container">
-                        <h1>Garden Grove</h1>
-                        <LoginDropdown onTypeChange={setSelectedType} />
-                        <LoginForm userType={selectedType} />
-                    </div>
+                    user ? (
+                        user.role === 'staff' ? (
+                            <Navigate to="/staff/dashboard" replace />
+                        ) : (
+                            <Navigate to="/shopper/dashboard" replace />
+                        )
+                    ) : (
+                        <div className="app-container">
+                            <h1>Garden Grove</h1>
+                            <LoginDropdown onTypeChange={setSelectedType} />
+                            <LoginForm userType={selectedType} />
+                        </div>
+                    )
                 }
             />
             <Route 
                 path="/signup" 
-                element={<SignupForm userType={selectedType} />} 
+                element={<SignupForm userType="shopper" />} 
             />
             <Route 
                 path="/shopper/dashboard" 
-                element={<ShopperDashboard />} 
+                element={
+                    <ProtectedRoute requiredRole="shopper">
+                        <ShopperDashboard />
+                    </ProtectedRoute>
+                } 
             />
             <Route 
                 path="/shopper/voucher/:id" 
-                element={<VoucherRedeem />} 
+                element={
+                    <ProtectedRoute requiredRole="shopper">
+                        <VoucherRedeem />
+                    </ProtectedRoute>
+                } 
             />
             <Route 
                 path="/staff/dashboard" 
-                element={<StaffDashboard />} 
+                element={
+                    <ProtectedRoute requiredRole="staff">
+                        <StaffDashboard />
+                    </ProtectedRoute>
+                } 
             />
             <Route 
                 path="/staff/voucher/create" 
-                element={<VoucherCreate />} 
+                element={
+                    <ProtectedRoute requiredRole="staff">
+                        <VoucherCreate />
+                    </ProtectedRoute>
+                } 
             />
             <Route 
                 path="/staff/voucher/edit/:id" 
-                element={<VoucherEdit />} 
+                element={
+                    <ProtectedRoute requiredRole="staff">
+                        <VoucherEdit />
+                    </ProtectedRoute>
+                } 
             />
             <Route 
                 path="/staff/voucher/:id" 
-                element={<StaffVoucherDetailsPage />} 
+                element={
+                    <ProtectedRoute requiredRole="staff">
+                        <StaffVoucherDetailsPage />
+                    </ProtectedRoute>
+                } 
             />
         </Routes>
     );
