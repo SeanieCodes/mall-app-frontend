@@ -16,12 +16,19 @@ const signUp = async (formData) => {
 
     if (data.token) {
       localStorage.setItem('token', data.token);
-      return JSON.parse(atob(data.token.split('.')[1])).payload;
+      // Decode token to get user information
+      const decoded = JSON.parse(atob(data.token.split('.')[1]));
+      return {
+        token: data.token,
+        username: decoded.username,
+        role: decoded.role,
+        _id: decoded._id
+      };
     }
 
     throw new Error('Invalid response from server');
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message || 'An error occurred during sign up');
   }
 };
 
@@ -40,17 +47,11 @@ const signIn = async (formData) => {
     }
 
     if (data.token) {
-      localStorage.setItem('token', data.token);
-      
+      // Decode the token to get the full user information
       const decoded = JSON.parse(atob(data.token.split('.')[1]));
       
-      localStorage.setItem('user', JSON.stringify({
-        username: data.user.username,
-        role: data.user.role,
-        _id: decoded._id
-      }));
-
       return {
+        token: data.token,
         username: data.user.username,
         role: data.user.role,
         _id: decoded._id
@@ -59,7 +60,7 @@ const signIn = async (formData) => {
 
     throw new Error('Invalid response from server');
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message || 'An error occurred during sign in');
   }
 };
 
