@@ -47,12 +47,12 @@ const VoucherRedeem = () => {
             setIsRedeeming(true);
             setError('');
         
-            const result = await redeem(id); // Call the redeem function from voucherService
+            const result = await redeem(id);
         
             if (result.error) {
-              setError(result.error); // Display the error if any
+              setError(result.error); 
             } else {
-              navigate('/shopper/dashboard'); // Navigate to the dashboard on successful redemption
+              navigate('/shopper/dashboard'); 
             }
           } catch (error) {
             setError('Failed to redeem voucher. Please try again.');

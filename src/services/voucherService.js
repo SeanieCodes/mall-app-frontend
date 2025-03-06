@@ -22,15 +22,14 @@ const create = async (formData) => {
       body: JSON.stringify(formData),
     });
 
-    // Check if the response is successful
     if (!res.ok) {
       throw new Error('Failed to create voucher. Please try again later.');
     }
 
-    return res.json(); // Return the created voucher data
+    return res.json(); 
   } catch (error) {
     console.error(error);
-    return { error: error.message }; // Handle the error
+    return { error: error.message }; 
   }
 };
 
@@ -45,15 +44,14 @@ const update = async (voucherId, formData) => {
       body: JSON.stringify(formData),
     });
 
-    // Check if the response is successful
     if (!res.ok) {
       throw new Error('Failed to update voucher. Please try again later.');
     }
 
-    return res.json(); // Return the updated voucher data
+    return res.json();
   } catch (error) {
     console.error(error);
-    return { error: error.message }; // Handle the error
+    return { error: error.message }; 
   }
 };
 
@@ -66,15 +64,14 @@ const remove = async (voucherId) => {
       },
     });
 
-    // Check if the response is successful
     if (!res.ok) {
       throw new Error('Failed to delete voucher. Please try again later.');
     }
 
-    return res.json(); // Return the deleted voucher data or a confirmation message
+    return res.json(); 
   } catch (error) {
     console.error(error);
-    return { error: error.message }; // Handle the error
+    return { error: error.message };
   }
 };
 
@@ -84,20 +81,19 @@ const redeem = async (voucherId) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`, // Ensure the token is passed
+        'Authorization': `Bearer ${localStorage.getItem('token')}`, 
       },
     });
 
-    // Check if the response is successful
     if (!res.ok) {
       const errorData = await res.json();
       throw new Error(errorData.error || 'Failed to redeem voucher. Please try again later.');
     }
 
-    return res.json(); // Return the response data after successfully redeeming the voucher
+    return res.json();
   } catch (error) {
     console.error(error);
-    return { error: error.message }; // Handle any error that occurs
+    return { error: error.message };
   }
 };
 

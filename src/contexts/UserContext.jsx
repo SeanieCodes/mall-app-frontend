@@ -7,7 +7,6 @@ export const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user data exists in localStorage when the app loads
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {

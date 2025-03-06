@@ -45,7 +45,6 @@ const ShopperDashboard = () => {
         
         const userRedemptionCount = voucher.redeemedBy
           ? voucher.redeemedBy.filter(redemption => {
-              console.log("Comparing:", redemption.user, userId);
               return redemption.user.toString() === userId.toString();
             }).length
           : 0;

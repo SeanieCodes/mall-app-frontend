@@ -8,7 +8,7 @@ const SignoutButton = () => {
     const { logout } = useContext(UserContext);
 
     const handleSignOut = () => {
-        logout(); // Use the context's logout function
+        logout(); 
         navigate('/');
     };
 

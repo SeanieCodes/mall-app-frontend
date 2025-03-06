@@ -9,7 +9,7 @@ const SignupForm = ({ userType }) => {
         username: '',
         password: '',
         confirmPassword: '',
-        role: 'shopper' // Default to shopper
+        role: 'shopper'
     });
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,7 +44,6 @@ const SignupForm = ({ userType }) => {
         setIsSubmitting(true);
         
         try {
-            // Only shoppers can sign up, staff accounts are pre-created
             if (userType !== 'shopper') {
                 setError('Only shoppers can sign up for new accounts.');
                 setIsSubmitting(false);
