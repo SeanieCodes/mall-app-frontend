@@ -102,6 +102,7 @@
 .redeemButton:disabled {
     background-color: var(--gray);
     cursor: not-allowed;
+    color: rgb(53, 53, 53)
 }
 
 .loadingMessage,

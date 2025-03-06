@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './LoginDropdown.css';
 
 const LoginDropdown = ({onTypeChange}) => {
-  const navigate = useNavigate();
-
   const options = [
     { value: 'shopper', label: 'Shopper' },
     { value: 'staff', label: 'Staff' }

@@ -16,7 +16,6 @@ const signUp = async (formData) => {
 
     if (data.token) {
       localStorage.setItem('token', data.token);
-      // Decode token to get user information
       const decoded = JSON.parse(atob(data.token.split('.')[1]));
       return {
         token: data.token,
@@ -47,7 +46,6 @@ const signIn = async (formData) => {
     }
 
     if (data.token) {
-      // Decode the token to get the full user information
       const decoded = JSON.parse(atob(data.token.split('.')[1]));
       
       return {

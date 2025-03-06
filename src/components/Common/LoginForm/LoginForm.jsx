@@ -37,14 +37,12 @@ const LoginForm = ({ userType }) => {
             const response = await signIn(formData);
             
             if (response && response.token) {
-                // Check if the user's role matches the selected user type
                 if (response.role !== userType) {
                     setError(`This account doesn't have ${userType} permissions. Please use the correct login type.`);
                     setIsSubmitting(false);
                     return;
                 }
                 
-                // Store user info in localStorage
                 localStorage.setItem(
                     'user',
                     JSON.stringify({
@@ -55,14 +53,12 @@ const LoginForm = ({ userType }) => {
                 );
                 localStorage.setItem('token', response.token);
                 
-                // Update context
                 setUser({
                     username: response.username,
                     role: response.role,
                     _id: response._id
                 });
                 
-                // Navigate based on role
                 if (response.role === 'staff') {
                     navigate('/staff/dashboard');
                 } else {

@@ -6,12 +6,10 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   const { user } = useContext(UserContext);
 
   if (!user) {
-    // Not logged in
     return <Navigate to="/" replace />;
   }
 
   if (requiredRole && user.role !== requiredRole) {
-    // Wrong role
     return <Navigate to="/" replace />;
   }
 
