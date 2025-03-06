@@ -11,7 +11,7 @@ const VoucherRedeem = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [voucher, setVoucher] = useState(null);
-    const [isRedeeming, setIsRedeeming] = useState(false);
+    const [isRedeemed, setIsRedeemed] = useState(false);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -44,15 +44,13 @@ const VoucherRedeem = () => {
 
     const handleRedeem = async () => {
         try {
-            setIsRedeeming(true);
+            setIsRedeemed(true);
             setError('');
         
             const result = await redeem(id);
         
             if (result.error) {
               setError(result.error); 
-            } else {
-              navigate('/shopper/dashboard'); 
             }
           } catch (error) {
             setError('Failed to redeem voucher. Please try again.');
@@ -96,9 +94,9 @@ const VoucherRedeem = () => {
                     <button 
                         className="redeemButton"
                         onClick={handleRedeem}
-                        disabled={isRedeeming}
+                        disabled={isRedeemed}
                     >
-                        {isRedeeming ? 'Processing...' : 'Redeem Now'}
+                        {isRedeemed ? 'Redeemed' : 'Redeem Now'}
                     </button>
 
                     {error && <div className="errorMessage">{error}</div>}
