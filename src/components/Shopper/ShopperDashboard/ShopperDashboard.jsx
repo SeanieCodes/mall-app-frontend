@@ -10,6 +10,7 @@ const ShopperDashboard = () => {
     const [userId, setUserId] = useState('');
     const [vouchers, setVouchers] = useState([]);
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,20 +26,35 @@ const ShopperDashboard = () => {
 
       const fetchAllVouchers = async () => {
         try {
+            setIsLoading(true);
             const vouchersData = await index();
-            setVouchers(vouchersData);
+            
+            if (Array.isArray(vouchersData)) {
+                setVouchers(vouchersData);
+            } else if (vouchersData && vouchersData.error) {
+                setError(vouchersData.error || "Failed to load vouchers.");
+                if (vouchersData.error.includes("unauthorized") || vouchersData.error.includes("token")) {
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('token');
+                    navigate('/');
+                }
+            } else {
+                setError("Unexpected response format. Please try again.");
+            }
         } catch (error) {
-          console.error("Error fetching vouchers:", error);
-          setError("Failed to load vouchers.");
+            console.error("Error fetching vouchers:", error);
+            setError("Failed to load vouchers.");
+        } finally {
+            setIsLoading(false);
         }
       };
 
       fetchAllVouchers();
-    }, []);
+    }, [navigate]);
 
-    const currentDate = new Date();
-    
-    const availableVouchers = vouchers.filter(voucher => {
+    const availableVouchers = Array.isArray(vouchers) ? vouchers.filter(voucher => {
+        const currentDate = new Date();
+        
         if (voucher.status !== 'active' || (voucher.endDate && new Date(voucher.endDate) < currentDate)) {
           return false;
         }
@@ -50,7 +66,19 @@ const ShopperDashboard = () => {
           : 0;
                 
         return userRedemptionCount < voucher.redemptionsPerShopper;
-    });
+    }) : [];
+
+    if (isLoading) {
+        return (
+            <div className="mainBackground">
+                <div className="dashboardContainer">
+                    <header className="dashboardHeader">
+                        <h2 className="welcomeText">Loading...</h2>
+                    </header>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="mainBackground">
