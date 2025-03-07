@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './UsageDetails.css';
 
 const UsageDetails = ({ voucher }) => {
@@ -13,12 +12,16 @@ const UsageDetails = ({ voucher }) => {
             minute: '2-digit'
         });
     };
-
-    const totalRedemptions = voucher.redeemedBy?.length || 0;
-    const uniqueUsers = new Set(voucher.redeemedBy?.map(redemption => redemption.user) || []).size;
-    const usagePercentage = voucher.redemptionsPerShopper > 0 
-        ? Math.round((totalRedemptions / voucher.redemptionsPerShopper) * 100) 
-        : 0;
+    
+    const redemptions = voucher.redeemedBy || [];
+    const totalRedemptions = redemptions.length;
+    const uniqueUserIds = new Set(redemptions.map(redemption => redemption.user));
+    
+    const stats = {
+        totalRedemptions,
+        uniqueUsers: uniqueUserIds.size,
+        globalUsage: voucher.globalRedemptionCount || 0
+    };
 
     return (
         <div className="usageDetailsContainer">
@@ -27,17 +30,17 @@ const UsageDetails = ({ voucher }) => {
             <div className="statsGrid">
                 <div className="statItem">
                     <span className="statLabel">Total Redemptions</span>
-                    <span className="statValue">{totalRedemptions}</span>
+                    <span className="statValue">{stats.totalRedemptions}</span>
                 </div>
                 
                 <div className="statItem">
                     <span className="statLabel">Unique Shoppers</span>
-                    <span className="statValue">{uniqueUsers}</span>
+                    <span className="statValue">{stats.uniqueUsers}</span>
                 </div>
                 
                 <div className="statItem">
                     <span className="statLabel">Global Usage</span>
-                    <span className="statValue">{voucher.globalRedemptionCount || 0}</span>
+                    <span className="statValue">{stats.globalUsage}</span>
                 </div>
             </div>
             
@@ -46,7 +49,7 @@ const UsageDetails = ({ voucher }) => {
                 
                 {totalRedemptions > 0 ? (
                     <div className="redemptionList">
-                        {(voucher.redeemedBy || []).map((redemption, index) => (
+                        {redemptions.map((redemption, index) => (
                             <div key={index} className="redemptionItem">
                                 <span className="userInfo">User ID: {redemption.user}</span>
                                 <span className="dateInfo">{formatDate(redemption.date)}</span>

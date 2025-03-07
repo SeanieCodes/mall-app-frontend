@@ -87,7 +87,7 @@ const VoucherRedeem = () => {
                 </header>
 
                 <main className="redeemContent">
-                    <VoucherDetails voucher={voucher} isInteractive={false} />
+                    <VoucherDetails voucher={voucher} isInteractive={false} showFullDescription={true} />
                     
                     <p className="redeemInstructions">Present voucher to cashier before clicking Redeem Now</p>
                     

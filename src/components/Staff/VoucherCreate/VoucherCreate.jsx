@@ -6,7 +6,6 @@ import DateRangePicker from '../DateRangePicker/DateRangePicker';
 import './VoucherCreate.css';
 import { create } from '../../../services/voucherService';
 
-
 const VoucherCreate = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
@@ -20,7 +19,14 @@ const VoucherCreate = () => {
         status: ''
     });
     const [error, setError] = useState('');
+    const [fieldErrors, setFieldErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const maxLengths = {
+        storeName: 20,
+        discount: 7,
+        description: 140
+    };
 
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user'));
@@ -31,6 +37,26 @@ const VoucherCreate = () => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
+        
+        if (maxLengths[name] && value.length > maxLengths[name]) {
+            setFieldErrors({
+                ...fieldErrors,
+                [name]: `Maximum ${maxLengths[name]} characters allowed`
+            });
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: value.slice(0, maxLengths[name])
+            }));
+            return;
+        }
+        
+        if (fieldErrors[name]) {
+            setFieldErrors({
+                ...fieldErrors,
+                [name]: undefined
+            });
+        }
+        
         setFormData(prevData => ({
             ...prevData,
             [name]: value
@@ -102,7 +128,7 @@ const VoucherCreate = () => {
 
           <form onSubmit={handleSubmit} className="voucherForm">
             <div className="formGroup">
-              <label htmlFor="storeName">Store Name</label>
+              <label htmlFor="storeName">Store Name (max 20 characters)</label>
               <input
                 type="text"
                 id="storeName"
@@ -110,12 +136,14 @@ const VoucherCreate = () => {
                 value={formData.storeName}
                 onChange={handleInputChange}
                 placeholder="Enter store name"
+                maxLength={maxLengths.storeName}
                 required
               />
+              {fieldErrors.storeName && <div className="fieldError">{fieldErrors.storeName}</div>}
             </div>
 
             <div className="formGroup">
-              <label htmlFor="discount">Discount</label>
+              <label htmlFor="discount">Discount (max 7 characters)</label>
               <input
                 type="text"
                 id="discount"
@@ -123,12 +151,14 @@ const VoucherCreate = () => {
                 value={formData.discount}
                 onChange={handleInputChange}
                 placeholder="e.g., 20% OFF"
+                maxLength={maxLengths.discount}
                 required
               />
+              {fieldErrors.discount && <div className="fieldError">{fieldErrors.discount}</div>}
             </div>
 
             <div className="formGroup">
-              <label htmlFor="description">Description</label>
+              <label htmlFor="description">Description (max 140 characters)</label>
               <textarea
                 id="description"
                 name="description"
@@ -136,8 +166,13 @@ const VoucherCreate = () => {
                 onChange={handleInputChange}
                 placeholder="Enter voucher description"
                 rows="4"
+                maxLength={maxLengths.description}
                 required
               />
+              <div className="charCounter">
+                {formData.description.length}/{maxLengths.description}
+              </div>
+              {fieldErrors.description && <div className="fieldError">{fieldErrors.description}</div>}
             </div>
 
             <DateRangePicker
