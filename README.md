@@ -2,13 +2,15 @@
 Garden Grove is a user-friendly digital platform designed to enhance the shopping experience by allowing staff to create discount vouchers and enabling shoppers to redeem them. The application streamlines promotional activities for retailers and provides shoppers with easy access to exclusive deals and discounts.  
 
 ## 🚀 Getting Started  
-- Check out the deployed app here: **[Garden Grove Live](https://gardengrove.vercel.app/)**
+- Check out the deployed app here: **[Garden Grove Live](https://mall-app-frontend.vercel.app/)**
 - The backend service for Garden Grove can be found here: **[Garden Grove Backend](https://github.com/nelvinq/mall-app-backend)**  
 
 ## 🛍️ Shop with Garden Grove
 ### For Shopping Mall Staff, 
 #### Login: Staff securely logs into the system.
+![Model](https://github.com/SeanieCodes/mall-app-frontend/blob/aa613b67365edfffeb8629020d0e32a03e14898a/src/assets/SS01%20-%20Staff%20Login.jpg)
 #### Dashboard Access: Staff accesses the voucher management dashboard.
+![Model](https://github.com/SeanieCodes/mall-app-frontend/blob/aa613b67365edfffeb8629020d0e32a03e14898a/src/assets/SS02%20-%20Staff%20Dashboard.jpg)
 #### Create Voucher:
 - Enter voucher details (discount value, expiration date, terms).
 - Set usage limits per shopper.
@@ -16,18 +18,24 @@ Garden Grove is a user-friendly digital platform designed to enhance the shoppin
 #### Edit/Delete Voucher (if needed):
 - Modify existing voucher details.
 - Remove expired or unnecessary vouchers.
+![Model](https://github.com/SeanieCodes/mall-app-frontend/blob/aa613b67365edfffeb8629020d0e32a03e14898a/src/assets/SS03%20-%20Staff%20Create%20Edit%20and%20Delete.jpg)
 #### Track Usage:
 - View redemption statistics.
 - Monitor voucher performance and shopper engagement.
+![Model](https://github.com/SeanieCodes/mall-app-frontend/blob/aa613b67365edfffeb8629020d0e32a03e14898a/src/assets/SS04%20-%20Staff%20View%20Details.jpg)
 
 ### For Shoppers,
 #### Register/Login: Shopper creates an account or logs in securely.
+![Model](https://github.com/SeanieCodes/mall-app-frontend/blob/aa613b67365edfffeb8629020d0e32a03e14898a/src/assets/SS05%20-%20Shopper%20Login%20and%20Create%20Account.jpg)
 #### Browse Vouchers: Shopper views available discount vouchers.
+![Model](https://github.com/SeanieCodes/mall-app-frontend/blob/aa613b67365edfffeb8629020d0e32a03e14898a/src/assets/SS06%20-%20Shopper%20Dashboard.jpg)
 #### Select a Voucher: Shopper chooses a voucher they want to use.
 #### Redeem Voucher:
 - Shopper presents the voucher at a participating store.
 - Staff verifies and approves redemption.
 - Voucher status updates in the system.
+![Model](https://github.com/SeanieCodes/mall-app-frontend/blob/aa613b67365edfffeb8629020d0e32a03e14898a/src/assets/SS07%20-%20Shopper%20Redeem.jpg)
+
 
 ## 👨‍💻 Project Planning  
 ### User Stories
