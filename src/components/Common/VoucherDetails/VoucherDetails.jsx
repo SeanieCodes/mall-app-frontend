@@ -1,7 +1,8 @@
 import './VoucherDetails.css';
 
-const VoucherDetails = ({ voucher, isInteractive = false }) => {
+const VoucherDetails = ({ voucher, isInteractive = false, showFullDescription = false }) => {
     if (!voucher) return null;
+    
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-US', {
             year: 'numeric',
@@ -18,7 +19,9 @@ const VoucherDetails = ({ voucher, isInteractive = false }) => {
                 <span className="discountAmount">{voucher.discount}</span>
             </div>
             
-            <p className="description">{voucher.description}</p>
+            <p className={`description ${showFullDescription ? 'fullDescription' : ''}`}>
+                {voucher.description}
+            </p>
             
             <p className="expiryDate">
                 Valid from: {formatDate(voucher.startDate)} to {formatDate(voucher.endDate)}

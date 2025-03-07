@@ -80,7 +80,7 @@ const VoucherDetailsPage = () => {
                         <div className="errorMessage">{error}</div>
                     ) : (
                         <>
-                            <VoucherDetails voucher={voucher} isInteractive={false} />
+                            <VoucherDetails voucher={voucher} isInteractive={false} showFullDescription={true} />
                             
                             <button 
                                 className="editButton"

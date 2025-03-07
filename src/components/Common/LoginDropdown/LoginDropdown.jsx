@@ -1,5 +1,4 @@
 import Select from 'react-select';
-import { useNavigate } from 'react-router-dom';
 import './LoginDropdown.css';
 
 const LoginDropdown = ({onTypeChange}) => {
