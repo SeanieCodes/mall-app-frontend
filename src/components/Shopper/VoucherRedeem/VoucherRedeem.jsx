@@ -56,7 +56,7 @@ const VoucherRedeem = () => {
             setError('Failed to redeem voucher. Please try again.');
             console.error('Redemption error:', error);
           } finally {
-            setIsRedeeming(false);
+            setIsRedeemed(true);
           }
         };
 
