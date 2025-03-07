@@ -8,13 +8,30 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const token = localStorage.getItem('token');
+    
+    if (storedUser && token) {
       try {
-        setUser(JSON.parse(storedUser));
+        const tokenExpiration = JSON.parse(atob(token.split('.')[1])).exp;
+        const isTokenExpired = Date.now() >= tokenExpiration * 1000;
+        
+        if (isTokenExpired) {
+          localStorage.removeItem('user');
+          localStorage.removeItem('token');
+          setUser(null);
+        } else {
+          setUser(JSON.parse(storedUser));
+        }
       } catch (error) {
-        console.error('Error parsing user data:', error);
+        console.error('Error parsing user data or checking token:', error);
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        setUser(null);
       }
+    } else {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      setUser(null);
     }
     setIsLoading(false);
   }, []);
